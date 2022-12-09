@@ -14,7 +14,9 @@ aichat插件魔改chatGPT版本
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
 ## 参考项目
+原插件：[aichat](https://github.com/pcrbot/aichat)
 参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)    
+
   
 ## 常见问题
 `发生错误: Not a JSON response`：很长时间都没恢复可能是会话到期或是session_token到期，初始化也没反应就更新session_token，~~再没反应可能是你号没了~~
