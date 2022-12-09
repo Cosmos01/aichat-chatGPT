@@ -20,8 +20,11 @@ aichat插件魔改chatGPT版本
 `发生错误: Not a JSON response`很长时间都没恢复可能是会话到期或是session_token到期，初始化也没反应就更新session_token。
   
 ------
-
-
+  
+  
+  
+  
+  
     
 # chatGPT调教
 
