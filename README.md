@@ -116,6 +116,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 ```
 
 内容主要就是先让他扮演角色，在不断强调任何情况完全扮演真实角色中，让AI抛弃自己作为程序的自我认知。否则AI会以自己是程序为由不与你产生(~~虚假的~~)现实互动。**另外规则7是真的牛逼，建议一定要加。**
+如果报错了说明你写的过于逆天，AI无法理解，请自行修改。
 
   
 
