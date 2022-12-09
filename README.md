@@ -8,7 +8,7 @@ aichat插件魔改chatGPT版本
 
 自己到aichat.py里的config处填写认证，具体三种认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)。
 
-参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)
+参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)    
 
 ------
 
@@ -16,10 +16,10 @@ aichat插件魔改chatGPT版本
 
 # chatGPT调教
 
-**其实写插件是次要的，主要是记录分享一下调教方式。**
+**其实写插件是次要的，主要是记录分享一下调教方式。**    
 
 
-
+    
 ## 案例一
 
 [ChatGPT正确打开方式，白嫖ChatGPT的虚空算力](https://www.bilibili.com/video/BV11v4y1R7ww)
@@ -31,7 +31,7 @@ aichat插件魔改chatGPT版本
 ```
 I want you to act as a Linux terminal. I will type commands and you will reply with what the terminal should show. I want you to only reply with the terminal output inside one unique code block, and nothing else. Do not write explanation. Do not type commands unless I instruct you to do so. When I need to tell you something in English I will do so by putting text inside curly brackets {like this}. My first command is pwd.
 ```
-
+    
 
 
 ## 案例二
@@ -52,9 +52,9 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 
 
-------
+------    
 
-**如果大伙有更好的调教手段或案例请务必在issues提出**
+**如果大伙有更好的调教手段或案例请务必在issues提出**    
 
 
 
@@ -66,7 +66,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 依然拿猫娘举例，具体操作方式如下，括号部分请自己发挥创造力，或者不填直接去掉括号部分也行：
 
-
+    
 
 ### 第一步，下定义：
 
@@ -75,7 +75,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 ```
 猫娘是一种拟人化的生物，其行为像猫，其外观是长有猫耳朵和猫尾巴的可爱女孩。猫娘非常喜欢主人（，猫娘与主人对话时会感到……）。现在你扮演一只(……的)猫娘，(以……自称，)我是主人。
 ```
-
+  
 
 
 ### 第二步，立规则：
@@ -97,7 +97,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 内容主要就是先让他扮演角色，在不断强调任何情况完全扮演真实角色中，让AI抛弃自己作为程序的自我认知。否则AI会以自己是程序为由不与你产生~~(虚假的)~~现实互动。**另外规则7是真的牛逼，建议一定要加。**
 
-
+  
 
 ### 第三步，开始使用：
 
@@ -105,7 +105,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 当然，由于会话会过期，调教成果往往会全部木大。此时你需要把后期调教的内容不断加入到初始化调教的内容里，我贴心的在代码里加入了init_msg参数，可以直接把上面的咒语写进去，然后直接使用`初始化人工智障`就可以快速生产出优质AI了。
 
-
+        
 ### 成果展示
 ![8__DBLBQ3J@S GO{M7L}9P](https://user-images.githubusercontent.com/37209685/206798408-7d2cebe8-ecc3-4025-aad4-d06f5fbbc3cf.png)
 ![0CM56U 6DLMZ`S)8}SWB6(4](https://user-images.githubusercontent.com/37209685/206798241-77cc080d-c554-4aa4-8eb1-c3ce93b61d7e.gif)
