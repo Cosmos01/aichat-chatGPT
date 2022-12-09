@@ -17,7 +17,7 @@ aichat插件魔改chatGPT版本
 # chatGPT调教
 
 **其实写插件是次要的，主要是记录分享一下调教方式。**    
-
+  
     
     
 ## 案例一
@@ -67,7 +67,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 依然拿猫娘举例，具体操作方式如下，括号部分请自己发挥创造力，或者不填直接去掉括号部分也行：
 
     
-
+    
 ### 第一步，下定义：
 
 这一步的要点就在于设定要详细，不能和案例二一样简写。后续AI的回复是会参考设定的，请各位发挥创造力完善设定。
