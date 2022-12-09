@@ -2,7 +2,7 @@
 
 aichat插件魔改chatGPT版本
 
-临时写的，特别简陋（甚至不确定是不是真的能跑，开摆！），如果人多我再考虑优化代码。
+目前是不同群不同回话，可以和群友一起调教AI。代码临时改的，比较简陋，可能有点问题，有空再考虑优化代码。但是慢不是我的错，他就是这么慢。
 
 先安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT --upgrade`
 
