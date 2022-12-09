@@ -66,6 +66,8 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 依然拿猫娘举例，具体操作方式如下，括号部分请自己发挥创造力，或者不填直接去掉括号部分也行。        
 
+
+
     
     
 ### 第一步，下定义：
