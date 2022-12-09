@@ -2,14 +2,23 @@
 
 aichat插件魔改chatGPT版本
 
-目前是不同群不同回话，可以和群友一起调教AI。代码临时改的，比较简陋，可能有点问题，有空再考虑优化代码。但是慢不是我的错，他就是这么慢。
-
-先安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT --upgrade`
-
-自己到aichat.py里的config处填写认证，具体三种认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)。
-
+目前是不同群不同会话，可以和群友一起调教AI。代码临时改的，比较简陋，可能有点问题，有空再考虑优化代码。但是慢不是我的错，他就是这么慢。
+相比原插件[aichat](https://github.com/pcrbot/aichat)只增加了一个命令：`初始化人工智障`，用来刷新本群会话。
+  
+## 安装方法
+1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
+2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT --upgrade`
+3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
+4. 到aichat.py里的config处填写密钥参数，三选一，具体三种认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
+5. 重启HoshinoBot
+6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
+  
+## 参考项目
 参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)    
-
+  
+## 常见问题
+`发生错误: Not a JSON response`很长时间都没恢复可能是会话到期或是session_token到期，初始化也没反应就更新session_token。
+  
 ------
 
 
