@@ -107,7 +107,7 @@ async def disable_aichat(bot, ev: CQEvent):
 @sv.on_message('group')
 async def ai_reply(bot, context):
     msg = str(context['message'])
-    session_id = "1"
+    session_id = str(context.group_id)
     if msg.startswith(f'[CQ:at,qq={context["self_id"]}]'):
         text = re.sub(cq_code_pattern, '', msg).strip()
         if text == '' or text in black_word:
