@@ -14,7 +14,8 @@ aichat插件魔改chatGPT版本
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
 ## 参考项目
-原插件：[aichat](https://github.com/pcrbot/aichat)
+原插件：[aichat](https://github.com/pcrbot/aichat)  
+
 参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)    
 
   
