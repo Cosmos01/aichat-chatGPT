@@ -126,6 +126,8 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 当然，由于会话会过期，调教成果往往会全部木大。此时你需要把后期调教的内容不断加入到初始化调教的内容里，我贴心的在代码里加入了init_msg参数，可以直接把上面的咒语写进去，然后直接使用`初始化人工智障`就可以快速生产出优质AI了。
 
         
-### 成果展示
+### 成果展示：
+只能说AI的潜力太强了  
+
 ![8__DBLBQ3J@S GO{M7L}9P](https://user-images.githubusercontent.com/37209685/206798408-7d2cebe8-ecc3-4025-aad4-d06f5fbbc3cf.png)
 ![0CM56U 6DLMZ`S)8}SWB6(4](https://user-images.githubusercontent.com/37209685/206798241-77cc080d-c554-4aa4-8eb1-c3ce93b61d7e.gif)
