@@ -75,6 +75,21 @@ async def init_neko(bot, ev: CQEvent):
         await bot.send(ev, err)
         print(err)
 
+@sv.on_prefix(('复活人工智障'))
+async def set_neko(bot, ev: CQEvent):
+    if not priv.check_priv(ev, priv.ADMIN):
+        return
+    s = ev.message.extract_plain_text()
+    group_id = str(ev.group_id)
+
+    if group_id in user_session:   
+        try:     
+            conversation_id = s.split(":")[0]
+            parent_id = s.split(":")[1]
+            user_session[group_id]['conversation_id'] = conversation_id
+            user_session[group_id]['parent_id'] = parent_id
+        except Exception as err:
+                    print(err) 
 
 @sv.on_prefix(('调整AI概率'))
 async def enable_aichat(bot, ev: CQEvent):
