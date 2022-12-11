@@ -6,7 +6,9 @@ aichat插件魔改chatGPT版本
   
 目前是不同群不同会话，可以和群友一起调教AI。代码临时改的，比较简陋，可能有点问题，有空再考虑优化代码。但是慢不是我的错，他就是这么慢。  
 
-相比原插件[aichat](https://github.com/pcrbot/aichat)只增加了一个命令：`初始化人工智障`，用来刷新本群会话并快速调教AI，初始化参数为init_msg，有需要请自行修改。
+相比原插件[aichat](https://github.com/pcrbot/aichat)只增加了两个命令：  
+`初始化人工智障`，用来刷新本群会话并快速调教AI，初始化参数为init_msg，有需要请自行修改。  
+`复活人工智障+conversation_id:parent_id`可以恢复会话，两个id在初始化的时候会给出，注意冒号分隔，例：复活人工智障60f2c94a-875f-461e-b3f5-984dcf0c5258:a7471c8a-e3f8-427e-8f5b-7f1b1396c9d6
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
