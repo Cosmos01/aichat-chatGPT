@@ -14,7 +14,7 @@ aichat插件魔改chatGPT版本
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT --upgrade`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到auth.json中填写密钥参数，认证方法建议用邮箱和密码，token很容易过期，access key方法应该是不能用的，具体认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
+4. 到auth.json中填写密钥参数，认证方法建议用邮箱和密码，token很容易过期，，access key方法应该是不能用的，具体认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
 5. 重启HoshinoBot
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
@@ -25,12 +25,12 @@ aichat插件魔改chatGPT版本
 
   
 ## 常见问题
-`发生错误: Not a JSON response`：很长时间都没恢复可能是会话到期或是session_token到期，初始化也没反应就更新session_token，~~再没反应可能是你号没了~~  
+`发生错误: Not a JSON response`：很长时间都没恢复可能是session_token到期，初始化也没反应就更新session_token，~~再没反应可能是你号没了~~  
 
 `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。
   
-用邮箱密码认证偶尔会报错，应该是revChatGPT的问题，需要重启一下。
-
+用邮箱密码认证偶尔会报错，应该是revChatGPT的问题，需要重启一下，但如果是报Captcha detected则是因为验证码，需要切换session_token认证方式。
+  
 ------
   
   
