@@ -71,6 +71,7 @@ async def init_neko(bot, ev: CQEvent):
     try:
         msg = get_chat_response(group_id, init_msg)
         await bot.send(ev, msg)
+        await bot.send(ev,str(user_session[group_id]))
     except Exception as err:
         await bot.send(ev, err)
         print(err)
