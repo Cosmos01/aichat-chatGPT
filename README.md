@@ -12,7 +12,7 @@ aichat插件魔改chatGPT版本
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT --upgrade`
+2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT==0.0.35`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到auth.json中填写密钥参数，认证方法建议用邮箱和密码，token很容易过期，，access key方法应该是不能用的，具体认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
 5. 重启HoshinoBot
