@@ -20,18 +20,15 @@ cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
 salt = None
 CONFIG_PATH = os.path.dirname(__file__)
 group_config = Config(os.path.join(CONFIG_PATH, "config.json"))
+with open(os.path.join(CONFIG_PATH,"auth.json"),"r") as auth_config:
+    auth_config = json.load(auth_config)
 
-# 三种认证方式任选，参考：https://github.com/acheong08/ChatGPT/wiki/Setup
-config = {
-    # "Authorization":"sk-",
-    "session_token": "eyJhXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-}
 
 DEFAULT_AI_CHANCE = 1  # 默认的AI回复概率
 user_session = dict()
 
 # 初始化bot
-chatbot = Chatbot(config)
+chatbot = Chatbot(auth_config)
 
 def get_chat_response(session_id, prompt):
 
