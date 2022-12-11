@@ -28,7 +28,8 @@ aichat插件魔改chatGPT版本
 `发生错误: Not a JSON response`：很长时间都没恢复可能是会话到期或是session_token到期，初始化也没反应就更新session_token，~~再没反应可能是你号没了~~  
 
 `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。
-
+  
+用邮箱密码认证偶尔会报错，应该是revChatGPT的问题，需要重启一下。
 ------
   
   
