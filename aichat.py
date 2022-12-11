@@ -13,7 +13,7 @@ sv = Service('人工智障', enable_on_default=False)
 black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触发的词可以填在这里
 
 # 可以输入bot的设定来初始化bot
-init_msg = "hello world"  # '''你是一个小萝莉'''
+init_msg = "你好"  # '''你是一个小萝莉'''
 
 bot = get_bot()
 cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
