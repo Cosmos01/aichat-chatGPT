@@ -2,6 +2,7 @@ import os
 import random
 import re
 import time
+import json
 from nonebot import get_bot
 from hoshino import Service, priv
 from hoshino.typing import CQEvent
