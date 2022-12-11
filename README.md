@@ -30,6 +30,7 @@ aichat插件魔改chatGPT版本
 `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。
   
 用邮箱密码认证偶尔会报错，应该是revChatGPT的问题，需要重启一下。
+
 ------
   
   
