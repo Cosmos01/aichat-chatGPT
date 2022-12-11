@@ -70,12 +70,12 @@ async def init_neko(bot, ev: CQEvent):
     if group_id in user_session:
         user_session.pop(group_id)
     try:
+        chatbot = Chatbot(auth_config)
         msg = get_chat_response(group_id, init_msg)
         await bot.send(ev, msg)
         await bot.send(ev,str(user_session[group_id]))
     except Exception as err:
         await bot.send(ev, err)
-        print(err)
 
 @sv.on_prefix(('复活人工智障'))
 async def set_neko(bot, ev: CQEvent):
