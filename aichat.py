@@ -5,7 +5,7 @@ import time
 from nonebot import get_bot
 from hoshino import Service, priv
 from hoshino.typing import CQEvent
-from hoshino.modules.aichat-chatGPT import Config
+from . import Config
 from revChatGPT.revChatGPT import Chatbot
 
 sv = Service('人工智障', enable_on_default=False)
