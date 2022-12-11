@@ -70,6 +70,7 @@ async def init_neko(bot, ev: CQEvent):
     if group_id in user_session:
         user_session.pop(group_id)
     try:
+        global chatbot
         chatbot = Chatbot(auth_config)
         msg = get_chat_response(group_id, init_msg)
         await bot.send(ev, msg)
