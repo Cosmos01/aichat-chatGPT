@@ -1,3 +1,6 @@
+# chatGPT升级了反爬，暂时不可用，更新中……
+
+
 # aichat-chatGPT
 
 aichat插件魔改chatGPT版本
