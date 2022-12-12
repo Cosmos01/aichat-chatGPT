@@ -32,6 +32,7 @@ aichat插件魔改chatGPT版本
 ## 常见问题
 1. `发生错误: Not a JSON response`：正常是因为操作过于频繁，很长时间都没恢复可能是session_token到期，初始化后没反应就更新session_token，~~再没反应可能是你号没了~~  
 2. `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。 
+3. `Exception: Wrong response code`: 认证失败，一般是认证参数有问题，需要确保获取cookie的浏览器和bot是同ip。也可能是chatGPT又作妖了，可以看看revChatGPT的issues。
 
 ------
   
