@@ -23,15 +23,18 @@ cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
 salt = None
 CONFIG_PATH = os.path.dirname(__file__)
 group_config = Config(os.path.join(CONFIG_PATH, "config.json"))
-with open(os.path.join(CONFIG_PATH,"auth.json"),"r") as auth_config:
-    auth_config = json.load(auth_config)
 
 
 DEFAULT_AI_CHANCE = 1  # 默认的AI回复概率
 user_session = dict()
 
+def get_auth_config():
+    with open(os.path.join(CONFIG_PATH,"auth.json"),"r") as auth_config:
+        auth_config = json.load(auth_config)
+    return auth_config
+
 # 初始化bot
-chatbot = Chatbot(auth_config)
+chatbot = Chatbot(get_auth_config())
 
 def get_chat_response(session_id, prompt):
 
@@ -73,7 +76,7 @@ async def init_neko(bot, ev: CQEvent):
         user_session.pop(group_id)
     try:
         global chatbot
-        chatbot = Chatbot(auth_config)
+        chatbot = Chatbot(get_auth_config())
         msg = get_chat_response(group_id, init_msg)
         await bot.send(ev, msg)
         await bot.send(ev,str(user_session[group_id]))
