@@ -1,8 +1,6 @@
 # chatGPT升级了反爬，已经给出解决方案（先前安装过的人使用，其他人正常跟下面的安装步骤即可）
-1. 更新revChatGPT `pip3 install revChatGPT --upgrade`
-2. 更新代码，或直接在代码上面加上:
-`import nest_asyncio
-nest_asyncio.apply()`
+1. 更新revChatGPT： `pip3 install revChatGPT --upgrade`
+2. 同步代码
 3. 按要求填写三个参数，参考：https://github.com/acheong08/ChatGPT/wiki/Setup#session-token-authentication
 
 # aichat-chatGPT
@@ -19,9 +17,9 @@ aichat插件魔改chatGPT版本
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install revChatGPT==0.0.35`
+2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip3 install revChatGPT --upgrade`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到auth.json中填写密钥参数，认证方法建议用邮箱和密码，但邮箱密码登录容易报各种错，而且用谷歌微软账号登录的没有邮箱和密码，access_token很容易过期，过期后需要重新填写并执行初始化，access key方法应该是不能用的，具体认证方式参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
+4. 到auth.json中填写密钥等参数，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie，具体获取参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
 5. 重启HoshinoBot
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
