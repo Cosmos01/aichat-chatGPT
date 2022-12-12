@@ -1,4 +1,4 @@
-# chatGPT升级了反爬，已经给出解决方案（先前安装过的人使用，其他人正常跟下面的安装步骤即可）
+# chatGPT升级了反爬，已经给出解决方案（先前安装过的人使用，其他人忽略）
 1. 更新revChatGPT： `pip3 install revChatGPT==0.0.38.8`
 2. 同步代码,安装第三方库nest_asyncio: `pip install nest_asyncio`
 3. 按要求填写三个参数，参考：https://github.com/acheong08/ChatGPT/wiki/Setup#session-token-authentication
