@@ -1,6 +1,6 @@
 # chatGPT升级了反爬，已经给出解决方案（先前安装过的人使用，其他人正常跟下面的安装步骤即可）
 1. 更新revChatGPT： `pip3 install revChatGPT --upgrade`
-2. 同步代码
+2. 同步代码,安装第三方库nest_asyncio: `pip install nest_asyncio`
 3. 按要求填写三个参数，参考：https://github.com/acheong08/ChatGPT/wiki/Setup#session-token-authentication
 
 # aichat-chatGPT
@@ -17,7 +17,7 @@ aichat插件魔改chatGPT版本
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip3 install revChatGPT --upgrade`
+2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip3 install revChatGPT --upgrade` 和 nest_asyncio: `pip install nest_asyncio`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到auth.json中填写密钥等参数，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie，具体获取参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
 5. 重启HoshinoBot
