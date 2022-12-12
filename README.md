@@ -142,10 +142,10 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 
 ------    
-
+  
+## 实操
+  
 **如果大伙有更好的调教手段或案例请务必在requests或issues提出**    
-
-
 
 参考案例并实验后，我发现大部分时候你让AI直接扮演一个真实的角色他是不愿意的(倔的一批)，比如上述案例二的猫娘，你要他进行一些现实互动时，他只会复读"我是在扮演猫娘不是真的猫娘不能XXX"之类的，效果显然没有达到预期。
 
