@@ -143,7 +143,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 ------    
 
-**如果大伙有更好的调教手段或案例请务必在issues提出**    
+**如果大伙有更好的调教手段或案例请务必在requests或issues提出**    
 
 
 
