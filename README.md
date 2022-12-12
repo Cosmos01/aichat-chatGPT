@@ -32,8 +32,6 @@ aichat插件魔改chatGPT版本
 ## 常见问题
 1. `发生错误: Not a JSON response`：正常是因为操作过于频繁，很长时间都没恢复可能是session_token到期，初始化后没反应就更新session_token，~~再没反应可能是你号没了~~  
 2. `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。 
-3. 用邮箱密码认证偶尔会报错，应该是revChatGPT的问题，需要重启一下，但如果是报Captcha detected则是因为验证码，需要切换session_token认证方式。
-4. `发生错误: asyncio.run() cannot be called from a running event loop`: 使用了新版本revChatGPT库，执行一下`pip install revChatGPT==0.0.35`
 
 ------
   
