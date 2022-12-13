@@ -17,6 +17,7 @@ aichat插件魔改chatGPT版本
 4. `更新凭证+session_token或不加`：方便输入凭证，不用去改文件了，也可以为空，为空时读文件内的session_token。
   
 ## 安装方法
+0. 确保有安装谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install pyChatGPT==0.3.6`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
