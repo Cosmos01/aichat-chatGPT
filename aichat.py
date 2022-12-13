@@ -60,7 +60,7 @@ async def init_neko(bot, ev: CQEvent):
 
     try:
         api.reset_conversation()
-        msg = get_chat_response(neko)
+        msg = get_chat_response(neko).strip()
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
@@ -97,7 +97,7 @@ async def ai_reply(bot, context):
         if text == '' or text in black_word:
             return
         try:
-            msg = get_chat_response(text)
+            msg = get_chat_response(text).strip()
             await bot.send(context, msg, at_sender=False)
         except Exception as err:
             print(err)
@@ -109,7 +109,7 @@ async def ai_reply_prefix(bot, ev: CQEvent):
     if text == '' or text in black_word:
         return
     try:
-        msg = get_chat_response(text)
+        msg = get_chat_response(text).strip()
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
