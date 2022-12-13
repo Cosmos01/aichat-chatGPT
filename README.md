@@ -1,8 +1,6 @@
-# chatGPT又作妖了，暂时部分人可能一直Wrong response code，确认ip没问题的话暂时是用不了了，静待更新
-更新进展：https://github.com/acheong08/ChatGPT/issues/261
-## 新版本的revChatGPT出来了，但是好像Windows还搞不了，如果有人用的是Linux带桌面版本的或者开模拟窗口有条件可以试试
-
-
+## revChatGPT看起来一时半会儿搞不定了，我用隔壁(pyChatGPT)[https://github.com/terry3041/pyChatGPT]改了改搞了个新方案，有条件的可以试一试
+### 我是在Windows带窗口的环境下测试的，其他环境未知，如果不能用我也没办法，具体用法可以看看这个库的说明https://github.com/terry3041/pyChatGPT
+### 似乎可以获取新token来延长有效时间，但是来不及写了，晚点再说
 
 # aichat-chatGPT
 
@@ -10,35 +8,32 @@ aichat插件魔改chatGPT版本
   
 声明：本项目的目的是调教AI，一切都只为了调教AI，没有任何其他不纯目的，所以不打算修改会话保留问题，要改我在代码里留了注释，自己改。  
   
-目前是不同群不同会话，可以和群友一起调教AI。代码临时改的，比较简陋，可能有点问题，有空再考虑优化代码。但是慢不是我的错，他就是这么慢。  
+目前只能统一会话。因为是调用浏览器，会比较慢。  
 
-相比原插件[aichat](https://github.com/pcrbot/aichat)只增加了两个命令：  
-`初始化人工智障`，用来刷新本群会话并快速调教AI，初始化参数为init_msg，有需要请自行修改。  
-`复活人工智障+conversation_id:parent_id`可以恢复会话，两个id在初始化的时候会给出，注意冒号分隔，例：复活人工智障60f2c94a-875f-461e-b3f5-984dcf0c5258:a7471c8a-e3f8-427e-8f5b-7f1b1396c9d6
+## 命令
+`初始化人工智障`，用来刷新会话，使用前请确保之前有对话，否则会卡你一会儿然后报错。
+`猫娘初始化`,内置猫娘，也可以改成别的初始化设定，修改目录下的init_msg.txt即可，同样要有会话。
+`/t+消息或@bot+消息`，你懂的
+`更新凭证+session_token或不加`：方便输入凭证，不用去改文件了，也可以为空，为空时读文件内的session_token。
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip3 install revChatGPT==0.0.38.8` 和 nest_asyncio: `pip install nest_asyncio`
+2. 安装必要第三方库[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)：`pip install pyChatGPT==0.3.6`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到auth.json中填写密钥等参数，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie，具体获取参考：[revChatGPT](https://github.com/acheong08/ChatGPT/wiki/Setup)
+4. 到auth.json中填写session_token参数，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie，具体获取参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)
 5. 重启HoshinoBot
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
 ## 参考项目
-原插件：[aichat](https://github.com/pcrbot/aichat)  
-
-参考(复制)了这位up的代码：[在QQ群机器人中使用ChatGPT](https://www.bilibili.com/read/cv20257021/)    
-
+原插件：[aichat](https://github.com/pcrbot/aichat)   
   
 ## 常见问题
-1. `发生错误: Not a JSON response`：正常是因为操作过于频繁，很长时间都没恢复可能是session_token到期，初始化后没反应就更新session_token，~~再没反应可能是你号没了~~  
-2. `发生错误: list index out of range`：chatGPT炸了，或是你的发言过于逆天，给chatGPT整无语了。 
-3. `Exception: Wrong response code`: 认证失败，一般是认证参数有问题，需要确保获取cookie的浏览器和bot是同ip。也可能是chatGPT又作妖了，可以看看revChatGPT的issues。
-4. bot完全没有反应：往上拉，看看加载插件的时候是否有报错，一般是上一条的情况。
+1. `发生错误: Too many requests, please slow down`：等等再试
+2. `发生错误: network error`: 重试不行就只能重来了
+3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
+4. `发生错误: name 'api' is not defined`: 加载出问题了，重启吧
 
 ------
-  
-  
   
   
   
