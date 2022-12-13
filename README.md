@@ -1,6 +1,6 @@
 # chatGPT又作妖了，暂时部分人可能一直Wrong response code，确认ip没问题的话暂时是用不了了，静待更新
 更新进展：https://github.com/acheong08/ChatGPT/issues/261
-## 新版本的revChatGPT出来了，但是好像Windows还搞不了，如果有人用的是Linux带桌面版本的有条件可以试试
+## 新版本的revChatGPT出来了，但是好像Windows还搞不了，如果有人用的是Linux带桌面版本的或者开模拟窗口有条件可以试试
 
 
 
