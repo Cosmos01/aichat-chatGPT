@@ -1,6 +1,6 @@
 ## revChatGPT看起来一时半会儿搞不定了，我用隔壁[pyChatGPT](https://github.com/terry3041/pyChatGPT)改了改搞了个新方案，有条件的可以试一试
 ### 我是在Windows带窗口的环境下测试的，其他环境未知，如果不能用我也没办法，具体用法可以看看这个库的说明https://github.com/terry3041/pyChatGPT
-### 似乎可以获取新token来延长有效时间，但是来不及写了，晚点再说
+### 加了获取新token来延长有效时间，但是没时间测试了，先放着了
 
 # aichat-chatGPT
 
