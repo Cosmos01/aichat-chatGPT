@@ -139,7 +139,9 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 理解了妹妹的设定后请回复好的哥哥.
 ```
 
+## 案例七
 
+顶级催眠：https://github.com/golfzert/chatgpt-chinese-prompt-hack
 
 
 
