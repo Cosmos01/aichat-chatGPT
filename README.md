@@ -1,7 +1,6 @@
-# chatGPT升级了反爬，已经给出解决方案（先前安装过的人使用，其他人忽略）
-1. 更新revChatGPT： `pip3 install revChatGPT==0.0.38.8`
-2. 同步代码,安装第三方库nest_asyncio: `pip install nest_asyncio`
-3. 按要求填写三个参数，参考：https://github.com/acheong08/ChatGPT/wiki/Setup#session-token-authentication
+# chatGPT又作妖了，暂时部分人可能一直Wrong response code，确认ip没问题的话暂时是用不了了，静待更新
+更新进展：https://github.com/acheong08/ChatGPT/issues/261
+
 
 ## 新版本revChatGPT 0.0.a42 支持调用浏览器，有条件的可以试试，只需要填session_token，我这里ChatGPT炸了，无法测试，用了新版本出现问题的暂时无法处理。（要不摆个几天等他更新稳定）
 
