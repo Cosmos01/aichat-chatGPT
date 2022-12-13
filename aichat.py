@@ -10,6 +10,9 @@ from .chatGPT import ChatGPT
 
 sv = Service('人工智障', enable_on_default=False)
 
+
+black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触发的词可以填在这里
+
 cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
 salt = None
 CONFIG_PATH = os.path.dirname(__file__)
