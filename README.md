@@ -34,6 +34,7 @@ aichat插件魔改chatGPT版本
 2. `发生错误: network error`: 重试不行就只能重来了
 3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
 4. `发生错误: name 'api' is not defined`: 加载出问题了，重启吧
+5. 偶尔会卡在一个json的页面，等等再试就行
 
 ------
   
