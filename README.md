@@ -69,7 +69,7 @@ I want you to act as a Linux terminal. I will type commands and you will reply w
 
 [如何让ChatGPT变得啥也不会只会陪睡](https://www.bilibili.com/video/BV1484y1r78J)
 
-这位UP更是知天易，——。让AI扮演一个猫娘(~~太好了，这就是我想要的~~)。猫娘鼻祖，调教典范，就是各方面都还不太完善，下面我完善了一下，可以参考一下。
+(~~太好了，这就是我想要的~~)。猫娘鼻祖，调教典范，就是各方面都还不太完善，下面我完善了一下，可以参考一下。
 
 咒语：
 
