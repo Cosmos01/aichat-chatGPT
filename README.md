@@ -32,8 +32,7 @@ aichat插件魔改chatGPT版本
 1. `发生错误: Too many requests, please slow down`：等等再试
 2. `发生错误: network error`: 有时候发了逆天言论或者太长的内容会出现，一般重试就行了。实在不行就重启。
 3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
-4. `发生错误: name 'api' is not defined`: 加载出问题了，重启吧
-5. 偶尔会卡在一个json的页面，等等再试就行
+4. `发生错误: name 'api' is not defined`: 看看网页，如果网页卡在一个json的页面，且json末尾error为空，等等再试就行，如果是"error":"RefreshAccessTokenError"，则是凭证过期或无效。
 
 ------
   
