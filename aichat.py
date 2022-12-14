@@ -56,7 +56,7 @@ async def init_neko(bot, ev: CQEvent):
         await bot.send(ev, '你也配？')
         return
 
-    with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8") as f:
+    with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8-sig") as f:
         init_msg = f.read()
 
     try:
