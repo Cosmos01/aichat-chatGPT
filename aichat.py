@@ -55,12 +55,13 @@ async def init_neko(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
         await bot.send(ev, '你也配？')
         return
-    init_msg = open(os.path.join(CONFIG_PATH, "init_msg.txt"))
-    neko = init_msg.read()
+
+    with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8") as f:
+        init_msg = f.read()
 
     try:
         api.reset_conversation()
-        msg = get_chat_response(neko).strip()
+        msg = get_chat_response(init_msg).strip()
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
