@@ -27,13 +27,18 @@ aichat插件魔改chatGPT版本
   
 ## 参考项目
 原插件：[aichat](https://github.com/pcrbot/aichat)   
-  
+
 ## 常见问题
 1. `发生错误: Too many requests, please slow down`：等等再试，如果出现在下面两种报错之后则和下面两种报错同处理方式。
 2. `发生错误: network error`: 有时候发了逆天言论或者太长的内容会出现，一般重试就行了，有时候需要刷新会话，实在不行就重启。
 3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
 4. `发生错误: name 'api' is not defined`: 看看网页，如果网页卡在一个json的页面，且json末尾error为空，等等再试就行，如果是"error":"RefreshAccessTokenError"，则是凭证过期或无效。
-5. 如果压根没弹出网页，可能是你的环境有点问题，我也不太了解情况，可以试试重装浏览器检查一下上面的第三方库是否正常安装之类的。也可以看看这个demo能不能运行https://github.com/terry3041/pyChatGPT#import-as-a-module 如果可以说明是我有问题，~~但我是真没环境测试这情况~~
+5. 如果压根没弹出网页，可能是你的环境有点问题，我也不太了解情况，可以试试重装浏览器检查一下上面的第三方库是否正常安装之类的。再不行我也无力，环境问题太难解决了。
+
+## 我的环境
+Windows Server 2019 Datacenter
+Python 3.8.9
+Google Chrome 版本 108.0.5359.99（正式版本） （64 位）
 
 ------
   
