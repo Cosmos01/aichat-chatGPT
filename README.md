@@ -27,7 +27,7 @@ aichat插件魔改chatGPT版本
   
 ## 参考项目
 - 原插件：[aichat](https://github.com/pcrbot/aichat)   
-- [pyChatGPT](https://github.com/terry3041/pyChatGPT)：略微修改集成进了项目
+- 略微修改集成进了项目：[pyChatGPT](https://github.com/terry3041/pyChatGPT)
 
 ## 常见问题
 1. `发生错误: Too many requests, please slow down`：等等再试，如果出现在下面两种报错之后则和下面两种报错同处理方式。
