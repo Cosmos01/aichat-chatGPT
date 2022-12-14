@@ -329,7 +329,7 @@ class ChatGPT:
         # Send the message
         self.__verbose_print('Sending message')
         messages = message.split("\n")
-        textsplit_len = len(textsplit)-1
+        textsplit_len = len(messages)-1
         for text in messages:
             self.driver.find_element(By.TAG_NAME, 'textarea').send_keys(text)
             if messages.index(text) != textsplit_len:
