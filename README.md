@@ -2,6 +2,8 @@
 ### 我是在Windows带窗口的环境下测试的，其他环境未知，linux如果带桌面或者xvfb+VNC之类模拟桌面应该也能用，如果不能用我也没办法，具体用法可以看看这个库的说明https://github.com/terry3041/pyChatGPT
 ### 加了获取新token来延长有效时间，但是有没有效果还是个迷，只要ChatGPT不抽风，持续个大半天到一天是没问题的。
 
+------
+
 # aichat-chatGPT
 
 aichat插件魔改chatGPT版本
