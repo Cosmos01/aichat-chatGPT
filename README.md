@@ -20,7 +20,7 @@ aichat插件魔改chatGPT版本
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.3.6`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到auth.json中填写session_token参数，具体获取参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie。需要代理的也可以在里面配置，支持http/https/socks4/socks5。
+4. 到auth.json中填写session_token参数，具体获取参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，**请尽量用一台机器的同浏览器获取token，要保证UA和IP一致**，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie。需要代理的也可以在里面配置，支持http/https/socks4/socks5。
 5. 重启HoshinoBot
 6. 在弹出的浏览器中手动通过一下CF验证。
 7. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
