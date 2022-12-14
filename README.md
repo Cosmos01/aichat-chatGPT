@@ -1,15 +1,13 @@
 ## revChatGPT看起来一时半会儿搞不定了，我用[pyChatGPT](https://github.com/terry3041/pyChatGPT)改了改搞了个新方案，原方案在另一个分支，等稳定了再看看
-### 我是在Windows带窗口的环境下测试的，其他环境未知，linux如果带桌面或者xvfb+VNC之类模拟桌面应该也能用，如果不能用我也没办法，具体用法可以看看这个库的说明https://github.com/terry3041/pyChatGPT
-### 加了获取新token来延长有效时间，但是有没有效果还是个迷，只要ChatGPT不抽风，持续个大半天到一天是没问题的。
+> ### 我是在Windows带窗口的环境下测试的，其他环境未知，linux如果带桌面或者xvfb+VNC之类模拟桌面应该也能用，如果不能用我也没办法，具体用法可以看看这个库的说明https://github.com/terry3041/pyChatGPT
+> ### 加了获取新token来延长有效时间，但是有没有效果还是个迷，只要ChatGPT不抽风，持续个大半天到一天是没问题的。
 
 ------
 
 # aichat-chatGPT
 
-aichat插件魔改chatGPT版本
-  
-  
-目前只能统一会话。因为是调用浏览器，会比较慢。  
+aichat插件魔改chatGPT版本  
+目前只能统一会话。因为是调用浏览器,加上AI要一个一个字打印，会比较慢。   
 
 ## 命令
 1. `初始化人工智障`，用来刷新会话，使用前请确保之前有对话，否则会卡你一会儿然后报错。
