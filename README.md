@@ -36,9 +36,9 @@ aichat插件魔改chatGPT版本
 5. 如果压根没弹出网页，可能是你的环境有点问题，我也不太了解情况，可以试试重装浏览器检查一下上面的第三方库是否正常安装之类的。再不行我也无力，环境问题太难解决了。
 
 ## 我的环境
-Windows Server 2019 Datacenter
-Python 3.8.9
-Google Chrome 版本 108.0.5359.99（正式版本） （64 位）
+- Windows Server 2019 Datacenter
+- Python 3.8.9
+- Google Chrome 版本 108.0.5359.99（正式版本） （64 位）
 
 ------
   
