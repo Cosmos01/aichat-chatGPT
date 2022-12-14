@@ -39,6 +39,8 @@ aichat插件魔改chatGPT版本
 - Windows Server 2019 Datacenter
 - Python 3.8.9
 - Google Chrome 版本 108.0.5359.99（正式版本） （64 位）
+- Google Chrome 版本 108.0.5359.125（正式版本） （64 位）
+- Proxifier对chrome.exe进行代理
 
 ------
   
