@@ -18,7 +18,7 @@ aichat插件魔改chatGPT版本
 ## 安装方法
 0. 确保有安装谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.3.6`
+2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.3.9.1`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到auth.json中填写session_token参数，具体获取参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，**请尽量用一台机器的同浏览器获取token，要保证UA和IP一致**，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie。需要代理的也可以在里面配置，支持http/https/socks4/socks5。
 5. 重启HoshinoBot
