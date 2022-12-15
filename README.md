@@ -1,6 +1,7 @@
 ### revChatGPT看起来一时半会儿搞不定了，我用[pyChatGPT](https://github.com/terry3041/pyChatGPT)改了改搞了个新方案，原方案在另一个分支，等稳定了再看看
 > #### 我是在Windows带窗口的环境下测试的，其他环境出问题我无法处理，作者给出了linux的方案，具体可以看看说明：https://github.com/terry3041/pyChatGPT
 > #### 加了获取新token来延长有效时间，但是有没有效果还是个迷，只要ChatGPT不抽风，持续个大半天到一天是没问题的。
+> #### 如果有出现更好的方案欢迎题出
 
 ------
 
