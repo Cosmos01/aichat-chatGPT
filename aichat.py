@@ -4,6 +4,7 @@ import re
 import string
 import json
 import time
+from hoshino.aiorequests import run_sync_func
 from hoshino import Service, priv
 from hoshino.typing import CQEvent
 from .chatGPT import ChatGPT
@@ -41,9 +42,9 @@ except Exception as e:
     print(e)
 
 
-def get_chat_response(prompt):
+async def get_chat_response(prompt):
     try:
-        resp = api.send_message(prompt)
+        resp = await run_sync_func(api.send_message, prompt)
         return resp['message']
     except Exception as e:
         print(e)
@@ -61,7 +62,7 @@ async def init_neko(bot, ev: CQEvent):
 
     try:
         api.reset_conversation()
-        msg = get_chat_response(init_msg).strip()
+        msg = (await get_chat_response(init_msg)).strip()
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
@@ -98,7 +99,7 @@ async def ai_reply(bot, context):
         if text == '' or text in black_word:
             return
         try:
-            msg = get_chat_response(text).strip()
+            msg = (await get_chat_response(text)).strip()
             await bot.send(context, msg, at_sender=False)
         except Exception as err:
             print(err)
@@ -110,7 +111,7 @@ async def ai_reply_prefix(bot, ev: CQEvent):
     if text == '' or text in black_word:
         return
     try:
-        msg = get_chat_response(text).strip()
+        msg = (await get_chat_response(text)).strip()
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
