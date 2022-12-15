@@ -43,7 +43,7 @@ aichat插件魔改chatGPT版本
 **其中不需要的参数请留空**
 ```
 {
-  "session_token":"********"
+	"session_token":"********",
 	"email":"*******@gmail.com",
 	"password":"*******",
 	"auth_type": "google",
