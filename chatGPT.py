@@ -20,13 +20,15 @@ class ChatGPT:
     '''
 
     def __init__(
-        self,
-        session_token: str = None,
-        email: str = None,
-        password: str = None,
-        auth_type: str = None,
-        proxy: str = None,
-        verbose: bool = False,
+            self,
+            session_token: str = None,
+            email: str = None,
+            password: str = None,
+            auth_type: str = None,
+            proxy: str = None,
+            user_data_dic: str = None,
+            profile_directory: str = None,
+            verbose: bool = False,
     ) -> None:
         '''
         Initialize the ChatGPT class\n
@@ -39,11 +41,14 @@ class ChatGPT:
         - proxy: (optional) The proxy to use, in URL format (i.e. `https://ip:port`)
         - verbose: (optional) Whether to print debug messages
         '''
+        self.__user_data_dic = user_data_dic
+        self.__profile_directory = profile_directory
+
         self.__verbose = verbose
 
         self.__proxy = proxy
         if self.__proxy and not re.findall(
-            r'(https?|socks(4|5)?):\/\/.+:\d{1,5}', self.__proxy
+                r'(https?|socks(4|5)?):\/\/.+:\d{1,5}', self.__proxy
         ):
             raise ValueError('Invalid proxy format')
 
@@ -60,7 +65,7 @@ class ChatGPT:
                 )
 
         self.__is_headless = (
-            platform.system() == 'Linux' and 'DISPLAY' not in os.environ
+                platform.system() == 'Linux' and 'DISPLAY' not in os.environ
         )
         self.__verbose_print('[0] Platform:', platform.system())
         self.__verbose_print('[0] Display:', 'DISPLAY' in os.environ)
@@ -102,6 +107,11 @@ class ChatGPT:
 
         # Start the browser
         options = uc.ChromeOptions()
+
+        if self.__profile_directory and self.__user_data_dic:
+            options.add_argument(f'--user-data-dir={self.__user_data_dic}')
+            options.add_argument(f'--profile-directory={self.__profile_directory}')
+
         options.add_argument('--window-size=800,600')
         if self.__proxy:
             options.add_argument(f'--proxy-server={self.__proxy}')
@@ -419,7 +429,7 @@ class ChatGPT:
             )
         except:
             pass
-        
+
         # Return the response
         return {
             'message': markdownify.markdownify(response.get_attribute('innerHTML')),
