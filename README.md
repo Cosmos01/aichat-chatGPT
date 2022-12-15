@@ -1,6 +1,7 @@
 ### 祝revChatGPT作者早日康复，现在换成[pyChatGPT](https://github.com/terry3041/pyChatGPT)方案，原方案在另一个分支，如果revChatGPT测试成功我会尽快支持。
 > #### 我是在Windows带窗口的环境下测试的，其他环境出问题我无法处理，作者给出了linux的方案，具体可以看看说明：https://github.com/terry3041/pyChatGPT
 > #### 加了获取新token来延长有效时间，但是有没有效果还是个迷，只要ChatGPT不抽风，持续个大半天到一天是没问题的。
+> #### 新增了认证方式，通过指定浏览器账号，提前登录谷歌账号，可以实现几乎不用动手的登录体验
 > #### 如果有出现更好的方案欢迎题出
 
 ------
