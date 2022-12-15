@@ -4,12 +4,12 @@
 > #### 如果有出现更好的方案欢迎题出
 
 ------
-
+  
 # aichat-chatGPT
-
+  
 aichat插件魔改chatGPT版本  
 目前只能统一会话。因为是调用浏览器,加上AI要一个一个字打印，会比较慢。   
-
+  
 ## 命令
 1. `初始化人工智障`，用来刷新会话，使用前请确保之前有对话，否则会卡你一会儿然后报错。
 2. `猫娘初始化`,内置猫娘，也可以改成别的初始化设定，修改目录下的init_msg.txt即可（UTF-8编码保存），同样要有会话。
@@ -21,10 +21,36 @@ aichat插件魔改chatGPT版本
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.3.9.2`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到auth.json中填写session_token参数，具体获取参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，**请尽量用一台机器的同浏览器获取token，要保证UA和IP一致**，参数过期后需要重新填写并执行初始化，推荐使用EditThisCookie插件读Cookie。需要代理的也可以在里面配置，支持http/https/socks4/socks5。
+4. 到auth.json中填写配置，参考下面认证方式和配置，
 5. 重启HoshinoBot
 6. 在弹出的浏览器中手动通过一下CF验证。
 7. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
+  
+## 认证方式
+- session_token：容易过期，推荐用下面的方式。
+- google账号登录：可以配合指定浏览器用户的参数来实现轻松登录。
+  
+## 配置
+- session_token
+> 用session_token认证方式时填写，具体获取方式参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，**请尽量用一台机器的同浏览器获取token，要保证UA和IP一致**，参数过期后可以使用更新凭证命令或是重新填写然后执行初始化命令，推荐使用EditThisCookie插件读Cookie。
+- user_data_dic/profile_directory
+> 登录到指定用户，两个参数必须同时存在。
+> 获取方式：`浏览器输入chrome://version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义`，参考下面例子。
+- email/password/auth_type
+> 三个参数需要同时存在，如果浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，可以随便填，但参数必须存在。
+- proxy
+> 支持http/https/socks4/socks5
+**其中不需要的参数请留空**
+```
+{
+  "session_token":"********"
+	"email":"*******@gmail.com",
+	"password":"*******",
+	"auth_type": "google",
+	"user_data_dic": "C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data",
+	"profile_directory": "Default"
+}
+```
   
 ## 参考项目
 - 原插件：[aichat](https://github.com/pcrbot/aichat)   
