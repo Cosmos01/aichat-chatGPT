@@ -42,7 +42,7 @@ aichat插件魔改chatGPT版本
 - proxy
 > 支持http/https/socks4/socks5，更推荐使用上面的SwitchyOmega代理，这东西似乎有时候有点问题。
   
-**其中不需要的参数请留空**
+**其中不需要的参数请整行删去，否则会被认为是有效参数**
 ```
 {
 	"session_token":"********",
