@@ -30,16 +30,18 @@ aichat插件魔改chatGPT版本
 - session_token：容易过期，推荐用下面的方式。
 - google账号登录：可以配合指定浏览器用户的参数来实现轻松登录。
   
-## 配置
+## 配置参数
 - session_token
 > 用session_token认证方式时填写，具体获取方式参考：[pyChatGPT](https://github.com/terry3041/pyChatGPT#usage)，**请尽量用一台机器的同浏览器获取token，要保证UA和IP一致**，参数过期后可以使用更新凭证命令或是重新填写然后执行初始化命令，推荐使用EditThisCookie插件读Cookie。
 - user_data_dic/profile_directory
-> 登录到指定用户，两个参数必须同时存在。
-> 获取方式：`浏览器输入chrome://version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义`，参考下面例子。
+> 两个参数必须同时存在,获取方式：
+> 浏览器输入chrome:\//version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义，参考下面例子。
+> 利用这两个参数可以先登录谷歌账号实现快速认证，或是提前装好SwitchyOmega、Tampermonkey等浏览器插件，推荐一个[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
 - email/password/auth_type
 > 三个参数需要同时存在，如果浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，可以随便填，但参数必须存在。
 - proxy
 > 支持http/https/socks4/socks5
+  
 **其中不需要的参数请留空**
 ```
 {
@@ -49,6 +51,7 @@ aichat插件魔改chatGPT版本
 	"auth_type": "google",
 	"user_data_dic": "C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data",
 	"profile_directory": "Default"
+	"proxy": "http://127.0.0.1:7890"
 }
 ```
   
