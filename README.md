@@ -36,6 +36,7 @@ aichat插件魔改chatGPT版本
 3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
 4. `发生错误: name 'api' is not defined`: 看看网页，如果网页卡在一个json的页面，且json末尾error为空，等等再试就行，如果是"error":"RefreshAccessTokenError"，则是凭证过期或无效。
 5. 如果压根没弹出网页，可能是你的环境有点问题，我也不太了解情况，可以试试重装或是回退([issues10](https://github.com/Cosmos01/aichat-chatGPT/issues/10))浏览器、检查一下上面的第三方库是否正常安装之类的。再不行我也无力，环境问题太难解决了。如果你运行这位作者的[demo](https://github.com/terry3041/pyChatGPT/blob/main/src/pyChatGPT/__main__.py)也弹不出浏览器，可以去问问他。
+6. `发生错误: Too many requests in 1 hour. Try again later.`:你的ip访问量太大了，换个代理应该就行了。
 
 ## 我的环境
 - Windows Server 2019 Datacenter
