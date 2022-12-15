@@ -59,8 +59,12 @@ aichat插件魔改chatGPT版本
 
 **其实写插件是次要的，主要是记录分享一下调教方式。**  
 **重要提示：调教和抽卡一样，随机性比较强，遇到SSR请珍惜(来自一个痛失猫猫的伤心人)**  
-    
-### 找到一个分享咒语的网站，https://onetwo.ren/ChatGPT-Magic-Chat
+  
+## 案例集合  
+
+- [一个分享咒语的网站](https://onetwo.ren/ChatGPT-Magic-Chat)
+- [一个逝去的猫娘纪录](https://gist.githubusercontent.com/ChenYFan/ffb8390aac6c4aa44869ec10fe4eb9e2/raw/3e10b883b6e78f22172f985e48dc5ecfda1a764c/train.txt)
+
 
 ### 案例一
 
