@@ -11,7 +11,6 @@ from .chatGPT import ChatGPT
 
 sv = Service('人工智障', enable_on_default=False)
 
-
 black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触发的词可以填在这里
 
 cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
@@ -19,21 +18,27 @@ salt = None
 CONFIG_PATH = os.path.dirname(__file__)
 
 
-def get_auth_config():
-    with open(os.path.join(CONFIG_PATH, "auth.json"), "r") as auth_config:
-        auth_config = json.load(auth_config)
+def get_auth_config() -> dict:
+    try:
+        with open(os.path.join(CONFIG_PATH, "auth.json"), "r") as auth_config:
+            auth_config = json.load(auth_config)
+    except Exception as e:
+        print(e)
     return auth_config
 
 
 # 初始化bot
-def get_api(token=""):
+def get_api():
     auth_config = get_auth_config()
-    if token == "":
-        token = auth_config["session_token"]
-    proxy = ""
-    if "proxy" in auth_config:
-        proxy = auth_config["proxy"]
-    return ChatGPT(session_token=token, proxy=proxy)
+
+    return ChatGPT(session_token=auth_config.get("session_token"),
+                   email=auth_config.get("email"),
+                   password=auth_config.get("password"),
+                   auth_type=auth_config.get("auth_type"),
+                   proxy=auth_config.get("proxy"),
+                   user_data_dic=auth_config.get("user_data_dic"),
+                   profile_directory=auth_config.get("profile_directory")
+                   )
 
 
 try:
@@ -48,7 +53,8 @@ async def get_chat_response(prompt):
         return resp['message']
     except Exception as e:
         print(e)
-        return f"发生错误: {str(e)}"
+        err = str(e) if len(str(e)) < 133 else str(e)[:133]
+        return f"发生错误: {err}"
 
 
 @sv.on_fullmatch('猫娘初始化')
