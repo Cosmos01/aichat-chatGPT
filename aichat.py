@@ -28,9 +28,10 @@ def get_auth_config() -> dict:
 
 
 # 初始化bot
-def get_api():
+def get_api(session_token=None):
     auth_config = get_auth_config()
-
+    if session_token:
+        auth_config["session_token"] = session_token
     return ChatGPT(session_token=auth_config.get("session_token"),
                    email=auth_config.get("email"),
                    password=auth_config.get("password"),
@@ -88,11 +89,12 @@ async def init_ai(bot, ev: CQEvent):
 async def init_api(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
         return
-    token = str(ev.message.extract_plain_text()).strip()
+    input_token = str(ev.message.extract_plain_text()).strip()
+    session_token = input_token if len(input_token) > 50 else None
     global api
     try:
         api.close()
-        api = get_api(token)
+        api = get_api(session_token)
     except Exception as err:
         await bot.send(ev, err)
 
