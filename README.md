@@ -36,7 +36,7 @@ aichat插件魔改chatGPT版本
 - user_data_dic/profile_directory
 > 两个参数必须同时存在,获取方式：
 > 浏览器输入chrome:\//version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义，参考下面例子。
-> 利用这两个参数可以先登录谷歌账号实现快速认证，或是提前装好SwitchyOmega、Tampermonkey等浏览器插件，推荐一个[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
+>> 利用这两个参数可以提前在浏览器登录谷歌账号实现快速认证，可以提前装好SwitchyOmega来配置代理，或是安装Tampermonkey[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
 - email/password/auth_type
 > 三个参数需要同时存在，如果浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，可以随便填，但参数必须存在。
 - proxy
