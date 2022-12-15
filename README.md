@@ -40,7 +40,7 @@ aichat插件魔改chatGPT版本
 - email/password/auth_type
 > 三个参数需要同时存在，如果浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，可以随便填，但参数必须存在。
 - proxy
-> 支持http/https/socks4/socks5
+> 支持http/https/socks4/socks5，更推荐使用上面的SwitchyOmega代理，这东西似乎有时候有点问题。
   
 **其中不需要的参数请留空**
 ```
