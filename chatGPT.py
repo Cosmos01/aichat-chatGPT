@@ -41,7 +41,7 @@ class ChatGPT:
         - proxy: (optional) The proxy to use, in URL format (i.e. `https://ip:port`)
         - verbose: (optional) Whether to print debug messages
         '''
-        
+
         self.__user_data_dic = user_data_dic
         self.__profile_directory = profile_directory
 
@@ -382,20 +382,17 @@ class ChatGPT:
 
         # Sending emoji (from https://stackoverflow.com/a/61043442)
         textbox.click()
-        self.driver.execute_script(
-            """
-        var element = arguments[0], txt = arguments[1];
-        element.value += txt;
-        element.dispatchEvent(new Event('change'));
-        """,
-            textbox,
-            message,
-        )
+        messages = message.split("\n")
+        textsplit_len = len(messages)-1
+        for text in messages:
+            self.driver.find_element(By.TAG_NAME, 'textarea').send_keys(text)
+            if messages.index(text) != textsplit_len:
+                self.driver.find_element(By.TAG_NAME, 'textarea').send_keys(Keys.SHIFT + Keys.ENTER)
         textbox.send_keys(Keys.ENTER)
 
         # Wait for the response to be ready
         self.__verbose_print('[send_msg] Waiting for completion')
-        WebDriverWait(self.driver, 90).until_not(
+        WebDriverWait(self.driver, 180).until_not(
             EC.presence_of_element_located((By.CLASS_NAME, 'result-streaming'))
         )
 
@@ -412,24 +409,10 @@ class ChatGPT:
             raise ValueError(response.text)
         self.__verbose_print('[send_msg] Response is not an error')
 
-        # 更新token,不确定效果，希望能用
-        try:
-            token = self.driver.get_cookie("__Secure-next-auth.session-token")["value"]
-            if token != self.__session_token:
-                self.__session_token = token
-            self.driver.execute_cdp_cmd(
-                'Network.setCookie',
-                {
-                    'domain': 'chat.openai.com',
-                    'path': '/',
-                    'name': '__Secure-next-auth.session-token',
-                    'value': self.__session_token,
-                    'httpOnly': True,
-                    'secure': True,
-                },
-            )
-        except:
-            pass
+        # 更新token
+        token = self.driver.get_cookie("__Secure-next-auth.session-token")["value"]
+        if token != self.__session_token:
+            self.__session_token = token
 
         # Return the response
         return {
