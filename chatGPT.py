@@ -41,6 +41,7 @@ class ChatGPT:
         - proxy: (optional) The proxy to use, in URL format (i.e. `https://ip:port`)
         - verbose: (optional) Whether to print debug messages
         '''
+        
         self.__user_data_dic = user_data_dic
         self.__profile_directory = profile_directory
 
