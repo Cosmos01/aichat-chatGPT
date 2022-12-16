@@ -74,6 +74,16 @@ async def init_neko(bot, ev: CQEvent):
     except Exception as err:
         print(err)
 
+        
+@sv.on_fullmatch('重新组织语言')
+async def init_ai(bot, ev: CQEvent):
+    if not priv.check_priv(ev, priv.ADMIN):
+        return
+    try:
+        api.try_again()
+    except Exception as err:
+        await bot.send(ev, err)
+        
 
 @sv.on_fullmatch('初始化人工智障')
 async def init_ai(bot, ev: CQEvent):
