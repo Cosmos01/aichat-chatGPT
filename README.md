@@ -16,7 +16,8 @@ aichat插件魔改chatGPT版本
 2. `猫娘初始化`,内置猫娘，也可以改成别的初始化设定，修改目录下的init_msg.txt即可（UTF-8编码保存），同样要有会话。
 3. `/t+消息或@bot+消息`，你懂的（/t是随便打的，可以自己去代码里改成别的）
 4. `更新凭证+session_token或不加`：重启浏览器并重新登录，如果输入了session_token则是指定用session_token登录。
-  
+5. `重新组织语言`：Try again
+
 ## 安装方法
 0. 确保有安装谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
