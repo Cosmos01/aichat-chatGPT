@@ -427,3 +427,7 @@ class ChatGPT:
         '''
         self.__verbose_print('Resetting conversation')
         self.driver.find_element(By.LINK_TEXT, 'New Chat').click()
+    
+    def try_again(self) -> None:
+        self.driver.find_element(By.CSS_SELECTOR, '.btn.flex.justify-center.gap-2.btn-neutral').click()
+
