@@ -29,6 +29,7 @@ class ChatGPT:
             user_data_dic: str = None,
             profile_directory: str = None,
             verbose: bool = False,
+            window_size: tuple = (800, 600),
     ) -> None:
         '''
         Initialize the ChatGPT class\n
@@ -56,6 +57,7 @@ class ChatGPT:
         self.__email = email
         self.__password = password
         self.__auth_type = auth_type
+        self.__window_size = window_size
         if self.__auth_type not in [None, 'google', 'windowslive']:
             raise ValueError('Invalid authentication type')
         self.__session_token = session_token
@@ -113,7 +115,7 @@ class ChatGPT:
             options.add_argument(f'--user-data-dir={self.__user_data_dic}')
             options.add_argument(f'--profile-directory={self.__profile_directory}')
 
-        options.add_argument('--window-size=800,600')
+        options.add_argument('--window-size=%s,%s' % self.__window_size)
         if self.__proxy:
             options.add_argument(f'--proxy-server={self.__proxy}')
         try:
@@ -383,7 +385,7 @@ class ChatGPT:
         # Sending emoji (from https://stackoverflow.com/a/61043442)
         textbox.click()
         messages = message.split("\n")
-        textsplit_len = len(messages)-1
+        textsplit_len = len(messages) - 1
         for text in messages:
             self.driver.find_element(By.TAG_NAME, 'textarea').send_keys(text)
             if messages.index(text) != textsplit_len:
@@ -399,7 +401,7 @@ class ChatGPT:
         # Get the response element
         self.__verbose_print('[send_msg] Finding response element')
         response = self.driver.find_elements(
-            By.XPATH, "//div[starts-with(@class, 'request-:')]"
+            By.XPATH, "//div[starts-with(@class, 'markdown prose break-words')]"
         )[-1]
 
         # Check if the response is an error
@@ -427,7 +429,6 @@ class ChatGPT:
         '''
         self.__verbose_print('Resetting conversation')
         self.driver.find_element(By.LINK_TEXT, 'New Chat').click()
-    
+
     def try_again(self) -> None:
         self.driver.find_element(By.CSS_SELECTOR, '.btn.flex.justify-center.gap-2.btn-neutral').click()
-
