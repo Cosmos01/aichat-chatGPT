@@ -75,23 +75,22 @@ async def init_neko(bot, ev: CQEvent):
         print(err)
 
 
-@sv.on_fullmatch('重新组织语言')
-async def try_again(bot, ev: CQEvent):
-    try:
-        resp = await run_sync_func(api.try_again)
-        await bot.send(ev, resp['message'])
-    except Exception as e:
-        print(e)
-        err = str(e) if len(str(e)) < 133 else str(e)[:133]
-        await bot.send(ev, err)
-
-
 @sv.on_fullmatch('初始化人工智障')
 async def init_ai(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
         return
     try:
         api.reset_conversation()
+    except Exception as err:
+        await bot.send(ev, err)
+
+
+@sv.on_fullmatch('重新组织语言')
+async def try_again(bot, ev: CQEvent):
+    if not priv.check_priv(ev, priv.ADMIN):
+        return
+    try:
+        api.try_again()
     except Exception as err:
         await bot.send(ev, err)
 
@@ -134,3 +133,4 @@ async def ai_reply_prefix(bot, ev: CQEvent):
         await bot.send(ev, msg)
     except Exception as err:
         print(err)
+
