@@ -14,8 +14,13 @@ sv = Service('人工智障', enable_on_default=False)
 black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触发的词可以填在这里
 
 cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
-salt = None
 CONFIG_PATH = os.path.dirname(__file__)
+flag = False
+
+
+def set_flag(b):
+    global flag
+    flag = b
 
 
 def get_auth_config() -> dict:
@@ -29,6 +34,7 @@ def get_auth_config() -> dict:
 
 # 初始化bot
 def get_api(session_token=None):
+    set_flag(False)
     auth_config = get_auth_config()
     if session_token:
         auth_config["session_token"] = session_token
@@ -49,11 +55,17 @@ except Exception as e:
 
 
 async def get_chat_response(prompt):
+    global flag
+    if flag:
+        return "等待上一对话完成中"
+    flag = True
     try:
         resp = await run_sync_func(api.send_message, prompt)
+        flag = False
         return resp['message']
     except Exception as e:
         print(e)
+        flag = False
         err = str(e) if len(str(e)) < 133 else str(e)[:133]
         return f"发生错误: {err}"
 
@@ -61,16 +73,16 @@ async def get_chat_response(prompt):
 @sv.on_fullmatch('猫娘初始化')
 async def init_neko(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
-        await bot.send(ev, '你也配？')
         return
-
+    set_flag(False)
     with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8") as f:
         init_msg = f.read()
 
     try:
         api.reset_conversation()
         msg = (await get_chat_response(init_msg)).strip()
-        await bot.send(ev, msg)
+        if msg:
+            await bot.send(ev, msg)
     except Exception as err:
         print(err)
 
@@ -81,10 +93,12 @@ async def init_ai(bot, ev: CQEvent):
         return
     try:
         api.reset_conversation()
+        set_flag(False)
     except Exception as err:
         await bot.send(ev, err)
 
 
+# 先放着，没啥用
 @sv.on_fullmatch('重新组织语言')
 async def try_again(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
@@ -118,7 +132,8 @@ async def ai_reply(bot, context):
             return
         try:
             msg = (await get_chat_response(text)).strip()
-            await bot.send(context, msg, at_sender=False)
+            if msg:
+                await bot.send(context, msg, at_sender=False)
         except Exception as err:
             print(err)
 
@@ -130,7 +145,7 @@ async def ai_reply_prefix(bot, ev: CQEvent):
         return
     try:
         msg = (await get_chat_response(text)).strip()
-        await bot.send(ev, msg)
+        if msg:
+            await bot.send(ev, msg)
     except Exception as err:
         print(err)
-
