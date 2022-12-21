@@ -401,7 +401,7 @@ class ChatGPT:
         # Get the response element
         self.__verbose_print('[send_msg] Finding response element')
         response = self.driver.find_elements(
-            By.XPATH, "//div[starts-with(@class, 'markdown prose break-words')]"
+            By.XPATH, "//div[starts-with(@class, 'markdown prose w-full break-words')]"
         )[-1]
 
         # Check if the response is an error
