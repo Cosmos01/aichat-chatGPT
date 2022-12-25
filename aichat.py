@@ -144,3 +144,13 @@ async def ai_reply_prefix(bot, ev: CQEvent):
             await bot.send(ev, msg)
     except Exception as err:
         print(err)
+
+
+@sv.on_prefix('获取会话id')
+async def get_conversation_id(bot, ev: CQEvent):
+    api.reset_conversation()
+    id = api.get_new_conversation_id()
+    if id == "":
+        await bot.send(ev, "获取失败")
+    else:
+        await bot.send(ev, id)
