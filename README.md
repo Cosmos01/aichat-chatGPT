@@ -3,7 +3,7 @@
 > #### 新增了认证方式，通过指定浏览器账号，提前登录谷歌账号，可以实现几乎不用动手的登录体验，顺便还能用浏览器插件解决代理等问题
 > #### 如果有出现更好的方案欢迎提出
 > #### 年底冲业绩中，有问题希望好哥哥直接提requests
-
+> #### 这几天有空了看看能不能实现一些会话ID相关功能
 ------
   
 # aichat-chatGPT
@@ -39,9 +39,10 @@ aichat插件魔改chatGPT版本
 > 浏览器输入chrome:\//version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义，参考下面例子。
 >> 利用这两个参数可以提前在浏览器登录谷歌账号实现快速认证，可以提前装好SwitchyOmega来配置代理，或是安装Tampermonkey，顺便推荐个[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
 - email/password/auth_type
-> google账号登录时使用，auth_type暂时只能为google，三个参数需要同时存在，如果使用上一个参数让浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，所以密码可以随便填，但密码参数必须存在。
+> 账号登录时使用，auth_type支持google、windowslive、openai。建议使用google，另外两个参数没测试过。账号密码和类型三个参数需要同时存在，如果使用上一个参数让浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，所以密码可以随便填，但密码参数必须存在。
 - proxy
-> 支持http/https/socks4/socks5，更推荐使用上面的SwitchyOmega代理，这东西似乎有时候有点问题。
+> 支持http/https/socks4/socks5，更推荐使用上面提到的SwitchyOmega代理，这东西似乎有时候有点问题。
+- 更多参数参考pyChatGPT项目源码中的注释，目前大部分都已经同步支持
   
 **其中不需要的参数请整行删去，否则会被认为是有效参数**
 ```
