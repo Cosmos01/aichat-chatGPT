@@ -16,6 +16,7 @@ black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触�
 cq_code_pattern = re.compile(r'\[CQ:\w+,.+\]')
 CONFIG_PATH = os.path.dirname(__file__)
 flag = False
+conversation = {}
 
 
 def set_flag(b):
@@ -44,7 +45,10 @@ def get_api(session_token=None):
                    auth_type=auth_config.get("auth_type"),
                    proxy=auth_config.get("proxy"),
                    user_data_dic=auth_config.get("user_data_dic"),
-                   profile_directory=auth_config.get("profile_directory")
+                   profile_directory=auth_config.get("profile_directory"),
+                   conversation_id=auth_config.get("conversation_id") if auth_config.get("conversation_id") else "",
+                   twocaptcha_apikey=auth_config.get("twocaptcha_apikey") if auth_config.get("twocaptcha_apikey") else "",
+                   login_cookies_path=auth_config.get("login_cookies_path") if auth_config.get("login_cookies_path") else "",
                    )
 
 
@@ -70,13 +74,15 @@ async def get_chat_response(prompt):
         return f"发生错误: {err}"
 
 
-@sv.on_fullmatch('猫娘初始化')
+@sv.on_prefix(('人格初始化', '猫娘初始化'))
 async def init_neko(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
         return
     set_flag(False)
-    with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8") as f:
-        init_msg = f.read()
+    init_msg = str(ev.message.extract_plain_text()).strip()
+    if init_msg == "":
+        with open(os.path.join(CONFIG_PATH, "init_msg.txt"), "r", encoding="utf-8") as f:
+            init_msg = f.read()
 
     try:
         api.reset_conversation()
@@ -98,17 +104,6 @@ async def init_ai(bot, ev: CQEvent):
         await bot.send(ev, err)
 
 
-# 先放着，没啥用
-@sv.on_fullmatch('重新组织语言')
-async def try_again(bot, ev: CQEvent):
-    if not priv.check_priv(ev, priv.ADMIN):
-        return
-    try:
-        api.try_again()
-    except Exception as err:
-        await bot.send(ev, err)
-
-
 @sv.on_prefix('更新凭证')
 async def init_api(bot, ev: CQEvent):
     if not priv.check_priv(ev, priv.ADMIN):
@@ -117,7 +112,7 @@ async def init_api(bot, ev: CQEvent):
     session_token = input_token if len(input_token) > 50 else None
     global api
     try:
-        api.close()
+        api.__del__()
         api = get_api(session_token)
     except Exception as err:
         await bot.send(ev, err)
