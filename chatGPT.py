@@ -694,3 +694,15 @@ class ChatGPT:
         self.__check_and_dismiss_intro()
         self.__check_and_dismiss_alert()
 
+    def get_new_conversation_id(self) -> str:
+        conversations = self.driver.find_elements(
+            By.XPATH, '//a[starts-with(@class, "flex py-3 px-3 items-center gap-3 relative rounded-md")]'
+        )
+        if len(conversations) < 3:
+            return ""
+        conversations[1].click()
+        conversations[0].click()
+        conversation_id = self.driver.current_url.split("/")[-1]
+        if len(conversation_id) != 36:
+            return ""
+        return conversation_id
