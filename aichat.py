@@ -259,6 +259,13 @@ async def add_conversation(bot, ev: CQEvent):
     conversation[name] = id
 
 
+@sv.on_fullmatch('获取会话id')
+async def get_conversation_id(bot, ev: CQEvent):
+    id = api.get_new_conversation_id()
+    if id == "":
+        await bot.send(ev, "获取会话id失败")
+        return
+    await bot.send(ev, id)
 
 
 # @sv.on_fullmatch('清空会话')
