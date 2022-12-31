@@ -274,7 +274,7 @@ async def add_conversation(bot, ev: CQEvent):
     conversation[name] = id
 
 
-@sv.on_fullmatch('获取人格id')
+@sv.on_fullmatch(('获取人格id','获取会话id'))
 async def get_conversation_id(bot, ev: CQEvent):
     id = api.get_new_conversation_id()
     if id == "":
