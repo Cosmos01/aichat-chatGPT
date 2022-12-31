@@ -9,7 +9,22 @@ from hoshino import Service, priv
 from hoshino.typing import CQEvent
 from .chatGPT import ChatGPT
 
-sv = Service('人工智障', enable_on_default=False)
+
+help_text = """命令
+1. `创建人格/新建人格+人格名`: 创建新人格，注意人格名不能大于36位
+2. `查看人格/人格列表/获取人格`: 获取当前所有人格及id
+3. `选择人格/切换人格+人格名`: 打开对应人格的会话
+4. `添加人格/添加会话+人格名:人格id`: 添加人格。
+5. `获取人格id`: 获取首位会话的id
+6. `初始化会话/初始化人工智障`: 打开新会话，但是不会返回会话id，可以使用`获取会话id`获取
+7. `人格初始化/猫娘初始化`: 内置猫娘，也可以改成别的初始化设定，修改目录下的init_msg.txt即可（UTF-8编码保存）
+8. `/t+消息或@bot+消息`: 你懂的（/t是随便打的，可以自己去代码里改成别的）
+9. `更新凭证+session_token或不加`: 重启浏览器并重新登录，如果配置文件没有会话id则选择最新的一个会话，如果输入了session_token则是指定用session_token登录
+10. `重新组织语言`: 重试上一条对话
+0. `清空会话`: (慎用)注释掉了，要用的话自己取消注释，注意代码中使用权限是SUPERUSER"""
+
+
+sv = Service('人工智障', enable_on_default=False, help_=help_text)
 
 black_word = ['今天我是什么少女', 'ba来一井']  # 如果有不想触发的词可以填在这里
 
@@ -259,7 +274,7 @@ async def add_conversation(bot, ev: CQEvent):
     conversation[name] = id
 
 
-@sv.on_fullmatch('获取会话id')
+@sv.on_fullmatch('获取人格id')
 async def get_conversation_id(bot, ev: CQEvent):
     id = api.get_new_conversation_id()
     if id == "":
