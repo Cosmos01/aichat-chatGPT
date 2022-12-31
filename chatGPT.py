@@ -31,8 +31,8 @@ class ChatGPT:
         moderation: bool = True,
         verbose: bool = False,
         window_size: tuple = (800, 600),
-        twocaptcha_apikey: str = '',
-        openai_auth_semi_automatic: bool = True,
+        captcha_solver: str = 'pypasser',
+        solver_apikey: str = '',
         login_cookies_path: str = '',
         user_data_dic: str = None,
         profile_directory: str = None,
@@ -50,8 +50,8 @@ class ChatGPT:
         - moderation: (optional) Whether to enable message moderation. Default is `True`
         - verbose: (optional) Whether to print debug messages
         - window_size: (optional) window_size for web driver
-        - twocaptcha_apikey: (optional) 2captcha apikey, for solving reCAPTCHA. Use the apikey only for auth_type='openai'
-        - openai_auth_semi_automatic: (optional) allow solving reCAPTCHA by user when 2captcha method have failed.
+        - captcha_solver: (optional) captcha solving method. Can be `pypasser` or `2captcha` or `manual`
+        - solver_apikey: (optional) captcha solver apikey, for solving reCAPTCHA. Use the apikey only for captcha_solver='2captcha'
         - login_cookies_path: (optional) cookies path to be saved or loaded.
         '''
         self.__user_data_dic = user_data_dic
@@ -70,8 +70,8 @@ class ChatGPT:
         self.__auth_type = auth_type
         self.__window_size = window_size
         self.__moderation = moderation
-        self.__twocaptcha_apikey = twocaptcha_apikey
-        self.__openai_auth_semi_automatic = openai_auth_semi_automatic
+        self.__captcha_solver = captcha_solver
+        self.__solver_apikey = solver_apikey
         self.__login_cookies_path = login_cookies_path
         if self.__auth_type not in [None, 'google', 'windowslive', 'openai']:
             raise ValueError('Invalid authentication type')
@@ -82,6 +82,28 @@ class ChatGPT:
                 raise ValueError(
                     'Please provide either a session token or login credentials'
                 )
+            if self.__auth_type == 'openai':
+                if self.__captcha_solver not in ['pypasser', '2captcha', 'manual']:
+                    raise ValueError(
+                        'Invalid captcha solving method. Can be pypasser, 2captcha or manual'
+                    )
+                if self.__captcha_solver == '2captcha' and not self.__solver_apikey:
+                    raise ValueError('Please provide a 2captcha apikey')
+                if self.__captcha_solver == 'pypasser':
+                    try:
+                        import ffmpeg_downloader as ffdl
+                    except ModuleNotFoundError:
+                        raise ValueError(
+                            'Please install ffmpeg_downloader, PyPasser, and pocketsphinx by running `pip install ffmpeg_downloader PyPasser pocketsphinx`'
+                        )
+
+                    ffmpeg_installed = bool(ffdl.ffmpeg_version)
+                    self.__verbose_print('[0] ffmpeg installed:', ffmpeg_installed)
+                    if not ffmpeg_installed:
+                        import subprocess as sp
+
+                        sp.run(['ffdl', 'install'])
+                    os.environ['PATH'] += os.pathsep + ffdl.ffmpeg_dir
 
         self.__is_headless = (
             platform.system() == 'Linux' and 'DISPLAY' not in os.environ
@@ -188,13 +210,13 @@ class ChatGPT:
         self.__check_and_dismiss_intro()
 
         # Check if there is an alert
-        self.__verbose_print('[init] Check if there is alert')
         self.__check_and_dismiss_alert()
 
     def __check_and_dismiss_alert(self):
+        self.__verbose_print('[check_alert] Check if there is alert')
         alerts = self.driver.find_elements(By.XPATH, '//div[@role="alert"]')
         if alerts:
-            self.__verbose_print('Dismissing alert')
+            self.__verbose_print('[check_alert] Dismissing alert')
             self.driver.execute_script(
                 """
             var element = document.querySelector('div[role="alert"]');
@@ -202,13 +224,16 @@ class ChatGPT:
                 element.parentNode.removeChild(element);
             """
             )
+        else:
+            self.__verbose_print('[check_alert] Did not found one')
 
     def __check_and_dismiss_intro(self):
+        self.__verbose_print('[check_intro] Check if there is intro')
         try:
             WebDriverWait(self.driver, 3).until(
                 EC.presence_of_element_located((By.ID, 'headlessui-portal-root'))
             )
-            self.__verbose_print('Dismissing intro')
+            self.__verbose_print('[check_intro] Dismissing intro')
             self.driver.execute_script(
                 """
             var element = document.getElementById('headlessui-portal-root');
@@ -217,21 +242,21 @@ class ChatGPT:
             """
             )
         except SeleniumExceptions.TimeoutException:
-            self.__verbose_print('[init] Did not found one')
+            self.__verbose_print('[check_intro] Did not found one')
             pass
 
     def __save_chat_gpt_cookies(self, path):
         with open(path, 'w', encoding='utf-8') as f:
             cookies_list = self.driver.execute_cdp_cmd(
-                "Network.getCookies", {"urls": ["https://chat.openai.com/chat"]}
-            )["cookies"]
+                'Network.getCookies', {'urls': ['https://chat.openai.com/chat']}
+            )['cookies']
             json.dump(cookies_list, f, indent=2, ensure_ascii=False)
 
     def __load_chat_gpt_cookies(self, path):
         with open(path, 'r', encoding='utf-8') as f:
             cookies_list = json.load(f)
         for cookie in cookies_list:
-            if cookie["name"] == "__Secure-next-auth.session-token":
+            if cookie['name'] == '__Secure-next-auth.session-token':
                 self.driver.execute_cdp_cmd('Network.setCookie', cookie)
 
     def __login(self) -> None:
@@ -253,6 +278,9 @@ class ChatGPT:
             EC.presence_of_element_located(
                 (By.XPATH, '//div[text()="Welcome to ChatGPT"]')
             )
+        )
+        WebDriverWait(self.driver, 5).until(
+            EC.element_to_be_clickable((By.XPATH, '//button[text()="Log in"]'))
         )
         self.driver.find_element(By.XPATH, '//button[text()="Log in"]').click()
 
@@ -291,16 +319,16 @@ class ChatGPT:
     def __check_capacity(self, target_url):
         while True:
             try:
-                self.__verbose_print('Checking if ChatGPT is at capacity')
+                self.__verbose_print('[check_cap] Checking if ChatGPT is at capacity')
                 WebDriverWait(self.driver, 3).until(
                     EC.presence_of_element_located(
                         (By.XPATH, '//div[text()="ChatGPT is at capacity right now"]')
                     )
                 )
-                self.__verbose_print('ChatGPT is at capacity, retrying')
+                self.__verbose_print('[check_cap] ChatGPT is at capacity, retrying')
                 self.driver.get(target_url)
             except SeleniumExceptions.TimeoutException:
-                self.__verbose_print('ChatGPT is not at capacity')
+                self.__verbose_print('[check_cap] ChatGPT is not at capacity')
                 break
 
     def __google_login(self):
@@ -385,10 +413,15 @@ class ChatGPT:
 
     def __2captcha_solve(self, enterprise=1, retry=8):
         self.driver.switch_to.default_content()
-        import twocaptcha
+        try:
+            import twocaptcha
+        except ModuleNotFoundError:
+            raise ValueError(
+                'twocaptcha module not found, please install it using `pip install 2captcha-python`'
+            )
 
         self.__verbose_print('[reCAPTCHA] trying twocaptcha max retry =', retry)
-        solver = twocaptcha.TwoCaptcha(self.__twocaptcha_apikey, pollingInterval=5)
+        solver = twocaptcha.TwoCaptcha(self.__solver_apikey, pollingInterval=5)
         # get result using 2Captcha
         el = self.driver.find_element(
             By.XPATH, '//div[@data-recaptcha-provider="recaptcha_enterprise"]'
@@ -404,7 +437,7 @@ class ChatGPT:
                     enterprise=enterprise,
                 )
             except Exception as e:
-                self.__verbose_print('twocaptcha solver error', e)
+                self.__verbose_print('[reCAPTCHA] twocaptcha solver error:', str(e))
             if result is not None:
                 break
         if result is None:
@@ -446,10 +479,11 @@ class ChatGPT:
                     )
                 )
             )
-            self.driver.find_element(
-                By.XPATH,
-                '//label[@class="rc-anchor-center-item rc-anchor-checkbox-label"]',
-            ).click()
+            # Create a div and block pypasser for some reasons
+            # self.driver.find_element(
+            #     By.XPATH,
+            #     '//label[@class="rc-anchor-center-item rc-anchor-checkbox-label"]',
+            # ).click()
             need_check_recaptcha_result = True
         except SeleniumExceptions.NoSuchFrameException as e:
             self.__verbose_print(e)
@@ -465,16 +499,25 @@ class ChatGPT:
                 )
             )
         except SeleniumExceptions.TimeoutException:
-            if self.__twocaptcha_apikey:
+            if self.__captcha_solver == '2captcha':
                 self.__2captcha_solve()
+            elif self.__captcha_solver == 'pypasser':
+                from pypasser import reCaptchaV2
+
+                self.__verbose_print('[reCAPTCHA] trying pypasser max retry = 3')
+                try:
+                    reCaptchaV2(self.driver)
+                except Exception as e:
+                    self.__verbose_print('[reCAPTCHA] pypasser solver error:', str(e))
 
         if need_check_recaptcha_result:
             if self.__have_recaptcha_value():
                 self.__verbose_print('[login] Congrats, solved reCAPTCHA.')
-            elif self.__openai_auth_semi_automatic:
+            else:
                 self.__verbose_print(
                     '[login] Ops, you have to solve reCAPTCHA on browser.'
                 )
+                self.driver.get(self.driver.current_url)
                 while need_check_recaptcha_result:
                     # check image selection reCAPTCHA
                     # self.__have_image_recaptcha()
@@ -694,6 +737,7 @@ class ChatGPT:
         self.__check_and_dismiss_intro()
         self.__check_and_dismiss_alert()
 
+
     def get_new_conversation_id(self) -> str:
         conversations = self.driver.find_elements(
             By.XPATH, '//a[starts-with(@class, "flex py-3 px-3 items-center gap-3 relative rounded-md")]'
@@ -701,8 +745,63 @@ class ChatGPT:
         if len(conversations) < 3:
             return ""
         conversations[1].click()
+        self.__check_and_dismiss_intro()
+        self.__check_and_dismiss_alert()
+        conversations = self.driver.find_elements(
+            By.XPATH, '//a[starts-with(@class, "flex py-3 px-3 items-center gap-3 relative rounded-md")]'
+        )
         conversations[0].click()
+        self.__check_and_dismiss_intro()
+        self.__check_and_dismiss_alert()
         conversation_id = self.driver.current_url.split("/")[-1]
         if len(conversation_id) != 36:
             return ""
         return conversation_id
+
+
+    def change_conversation(self) -> None:
+        self.driver.get('https://chat.openai.com/chat/' + self.conversation_id)
+        self.__check_and_dismiss_intro()
+        self.__check_and_dismiss_alert()
+
+    def select_last_conversation(self) -> None:
+        conversations = self.driver.find_elements(
+            By.XPATH, '//a[starts-with(@class, "flex py-3 px-3 items-center gap-3 relative rounded-md")]'
+        )
+        conversations[0].click()
+
+
+    def try_again(self) -> str:
+
+        self.driver.find_element(By.CSS_SELECTOR, '.btn.flex.justify-center.gap-2.btn-neutral.border-0').click()
+
+        # Wait for the response to be ready
+        self.__verbose_print('[send_msg] Waiting for completion')
+        WebDriverWait(self.driver, 120).until_not(
+            EC.presence_of_element_located((By.CLASS_NAME, 'result-streaming'))
+        )
+
+        # Get the response element
+        self.__verbose_print('[send_msg] Finding response element')
+        responses = self.driver.find_elements(
+            By.XPATH, '//div[@class="flex-1 overflow-hidden"]//div[p]'
+        )
+        if responses:
+            response = responses[-1]
+            # Check if the response is an error
+            self.__verbose_print('[send_msg] Checking if response is an error')
+
+            if 'text-red' in response.get_attribute('class'):
+                self.__verbose_print('[send_msg] Response is an error')
+                raise ValueError(response.text)
+
+        response = self.driver.find_elements(
+            By.XPATH, '//div[starts-with(@class, "markdown prose w-full break-words")]'
+        )[-1]
+        self.__verbose_print('[send_msg] Response is not an error')
+
+        # Return the response
+        msg = markdownify.markdownify(response.get_attribute('innerHTML')).replace(
+            'Copy code`', '`'
+        )
+        return msg
