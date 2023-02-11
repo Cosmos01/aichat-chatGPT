@@ -44,7 +44,7 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 - user_data_dic/profile_directory
 > 指定浏览器用户，两个参数必须同时存在，获取方式：  
 > 浏览器输入chrome:\//version，查看个人资料路径，前面的路径为user_data_dic，末尾文件夹名为profile_directory，注意Windows下打两个反斜杠转义，参考下面例子。
->> 利用这两个参数可以提前在浏览器登录谷歌账号实现快速认证，可以提前装好SwitchyOmega来配置代理，或是安装Tampermonkey，顺便推荐个[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
+>> 利用这两个参数可以提前在浏览器登录谷歌账号实现快速认证，可以提前装好SwitchyOmega（用法自己查询）来配置代理，或是安装Tampermonkey，顺便推荐个[屏蔽安全检查脚本](https://greasyfork.org/zh-CN/scripts/456507-openai-catgirl-chat)
 - email/password/auth_type
 > 账号登录时使用，auth_type支持google、windowslive、openai。建议使用google，另外两个参数没测试过。账号密码和类型三个参数需要同时存在，如果使用上一个参数让浏览器已经登录了谷歌账户就会自动跳过用户名密码步骤，所以密码可以随便填，但密码参数必须存在。
 - proxy
@@ -76,8 +76,8 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 ## 我的环境
 - Windows Server 2019 Datacenter
 - Python 3.8.9
-- Google Chrome 版本 108.0.5359.125（正式版本） （64 位）
-- 浏览器安装SwitchyOmega插件进行代理（连本地工具端口，用法自己了解）
+- Google Chrome 版本 110.0.5481.78（正式版本） （64 位）
+- 浏览器安装SwitchyOmega插件进行代理
 
 ## 鸣谢
 
