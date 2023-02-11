@@ -1,7 +1,7 @@
 ### 使用[pyChatGPT](https://github.com/terry3041/pyChatGPT)方案。
 > #### 我是在Windows环境下测试的，其他环境出问题我无法处理，作者给出了linux的方案，具体可以看看说明：https://github.com/terry3041/pyChatGPT
 > #### 增加了简易认证方式，通过指定浏览器账号，提前登录谷歌账号，可以实现几乎不用动手的登录体验，顺便还能用浏览器插件解决代理等问题。
-> #### 会话(人格)相关功能已更新，有问题欢迎提出
+> #### 呜呜呜猫娘调教不出来了，lei了
 ------
   
 # aichat-chatGPT
@@ -26,7 +26,7 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 ## 安装方法
 0. 确保有安装谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.4.1`
+2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.4.3.3`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到auth.json中填写配置，参考下面认证方式和配置，
 5. 重启HoshinoBot (启动前确保关闭了浏览器)
@@ -79,7 +79,7 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 - Windows Server 2019 Datacenter
 - Python 3.8.9
 - Google Chrome 版本 108.0.5359.125（正式版本） （64 位）
-- 浏览器安装SwitchyOmega插件进行代理
+- 浏览器安装SwitchyOmega插件进行代理（连本地工具端口，用法自己了解）
 
 ## 鸣谢
 
