@@ -142,7 +142,7 @@ async def init_neko(bot, ev: CQEvent):
         msg = (await get_chat_response(init_msg)).strip()
         if msg:
             await bot.send(ev, msg)
-            id = api.get_new_conversation_id()
+            id = api.get_conversation_id()
             if id == "":
                 await bot.send(ev, "获取会话id失败")
                 return
@@ -219,7 +219,7 @@ async def get_new_conversation(bot, ev: CQEvent):
         msg = (await get_chat_response("hello")).strip()
         if msg:
             await bot.send(ev, msg)
-            id = api.get_new_conversation_id()
+            id = api.get_conversation_id()
             if id == "":
                 await bot.send(ev, "获取会话id失败")
                 return
@@ -238,8 +238,8 @@ async def change_conversation(bot, ev: CQEvent):
     if name == "":
         name = "Default"
     if name in conversation:
-        api.conversation_id = conversation[name]
-        api.change_conversation()
+        conversation_id = conversation[name]
+        api.change_conversation(conversation_id)
     else:
         await bot.send(ev, "此人格不存在，可以使用`人格列表`命令获取现有人格。")
 
@@ -276,7 +276,7 @@ async def add_conversation(bot, ev: CQEvent):
 
 @sv.on_fullmatch(('获取人格id','获取会话id'))
 async def get_conversation_id(bot, ev: CQEvent):
-    id = api.get_new_conversation_id()
+    id = api.get_conversation_id()
     if id == "":
         await bot.send(ev, "获取会话id失败")
         return
