@@ -1,6 +1,7 @@
 ### 使用[pyChatGPT](https://github.com/terry3041/pyChatGPT)方案。
 > #### 我是在Windows环境下测试的，其他环境出问题我无法处理，作者给出了linux的方案，具体可以看看说明：https://github.com/terry3041/pyChatGPT
-> #### 增加了简易认证方式，通过指定浏览器账号，提前登录谷歌账号，可以实现几乎不用动手的登录体验，顺便还能用浏览器插件解决代理等问题。
+> #### 增加了简易认证方式，通过指定浏览器账号，提前登录谷歌账号，可以实现几乎不用动手的登录体验，顺便还能用浏览器插件解决代理等问题。（我只保证这种方式能够正常稳定使用）
+> #### 注意谷歌浏览器需要110以上版本
 > #### 呜呜呜猫娘调教不出来了，lei了
 ------
   
@@ -24,7 +25,7 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 0. `清空会话`: (慎用)注释掉了，要用的话自己取消注释，注意代码中使用权限是SUPERUSER
 
 ## 安装方法
-0. 确保有安装谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
+0. 确保有安装110以上版本的谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.4.3.3`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
@@ -68,12 +69,9 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 - 略微修改集成进了项目：[pyChatGPT](https://github.com/terry3041/pyChatGPT)
 
 ## 常见问题
-1. `发生错误: Too many requests, please slow down`：等等再试，如果出现在下面两种报错之后则和下面两种报错同处理方式。
-2. `发生错误: network error`: 有时候发了逆天言论或者太长的内容会出现，一般重试就行了，有时候需要刷新会话，实在不行就重启。
-3. `发生错误: Your authentication token has expired. Please try signing in again.`：session_token过期，再去获取一个新的
-4. `发生错误: name 'api' is not defined`: 看看网页，如果网页卡在一个json的页面，且json末尾error为空，等等再试就行，如果是"error":"RefreshAccessTokenError"，则是凭证过期或无效。
-5. 如果压根没弹出网页，请先确保你已经关闭了浏览器(检查一下后台或重启系统)，再不行可能是你的环境有点问题，我也不太了解情况，可以试试重装或是回退([issues10](https://github.com/Cosmos01/aichat-chatGPT/issues/10))浏览器、检查一下上面的第三方库是否正常安装之类的。再不行我也无力，环境问题太难解决了。如果你运行这位作者的[demo](https://github.com/terry3041/pyChatGPT/blob/main/src/pyChatGPT/__main__.py)也弹不出浏览器，可以去问问他。
-6. `发生错误: Too many requests in 1 hour. Try again later.`: 配额上限，等下一个小时，如果没在频繁使用则是你的ip访问量太大了，换个代理应该就行了。
+1. `发生错误: name 'api' is not defined`: 多种情况，可能是你浏览器没更新到110版本，也可能凭证问题，更新凭证或修改登录方式（我只保证谷歌账号自动登录方式能稳定使用，其他方式懒得测试了）
+2. 如果压根没弹出网页，请先确保你已经关闭了浏览器(检查一下后台或重启系统)，再不行可能是你的环境有点问题，检查一下上面的第三方库是否正常安装之类的。再不行我也无力，环境问题太难解决了。如果你运行作者的[demo](https://github.com/terry3041/pyChatGPT/blob/main/src/pyChatGPT/__main__.py)也弹不出浏览器，可以去问问他。
+3. `发生错误: Too many requests in 1 hour. Try again later.`: 配额上限，等下一个小时，如果没在频繁使用则是你的ip访问量太大了，换个代理应该就行了。
 
 ## 我的环境
 - Windows Server 2019 Datacenter
