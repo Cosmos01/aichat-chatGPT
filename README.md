@@ -91,10 +91,6 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 有空实现这个
 ![0CCC2@19$E0_OB_~RMYW JR](https://user-images.githubusercontent.com/37209685/208008656-e4868ff6-006d-4018-a5b0-b337157ce58d.jpg)  
 
-![0U8KKOY)3_9AMLD`73E5Y1](https://user-images.githubusercontent.com/37209685/208008676-27a72226-7f32-4fce-9455-8e794e4d9f25.jpg)
-
-![@NPD}$X`JX_B{7FHCB24_HO](https://user-images.githubusercontent.com/37209685/208008696-c6ff3afb-0a0d-4506-be2e-fb1734cf3f2e.jpg)  
-
   
   
 <br><br><br><br><br><br><br><br>
