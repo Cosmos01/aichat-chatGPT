@@ -24,6 +24,7 @@ class Client:
         self.messages = message
 
     async def send(self, message, record=True):
+        openai.api_key = self.chat.api_key
         try:
             response = await self.chat.acreate(
                 model=self.model,
