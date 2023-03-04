@@ -25,6 +25,7 @@ class Client:
         self.messages = message
 
     async def send(self, message, record=True):
+        self.messages.append({"role": "user", "content": message})
         try:
             response = await openai.ChatCompletion.acreate(
                 model=self.model,
@@ -34,8 +35,9 @@ class Client:
             )
             msg = response.choices[0].message.content.strip()
             if msg and record:
-                self.messages.append({"role": "user", "content": message})
                 self.messages.append({"role": "assistant", "content": msg})
+            else:
+                self.messages = self.messages[:-1]
             return msg.strip()
         except Exception as e:
             return f"发生错误: {str(e).strip()}"
