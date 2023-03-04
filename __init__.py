@@ -18,7 +18,7 @@ class Config:
         api_keys = self._config.get("OPTION", "api_key", fallback="")
         self.api_keys = api_keys.split(",")
         self.model = self._config.get("OPTION", "model", fallback="gpt-3.5-turbo")
-        self.record = self._config.getboolean("OPTION", "save_msg", fallback=True)
+        self.record = self._config.getboolean("OPTION", "record", fallback=True)
         self.interval = self._config.getint("OPTION", "interval", fallback=5)
         self.max_tokens = self._config.getint("OPTION", "max_tokens", fallback=1000)
         items = self._config.items("GROUP")
