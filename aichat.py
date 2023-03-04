@@ -1,4 +1,5 @@
 import re
+import random
 from hoshino import Service
 from hoshino.typing import CQEvent
 from . import Config
@@ -28,9 +29,11 @@ async def get_chat_response(group_id, prompt):
         # prompt = prompt.removeprefix("记住")
         prompt = prompt[2:]
         record = True
+    api_key = random.choice(config.api_keys)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(config.api_key, config.model, config.max_tokens)
+        group_clients[group_id] = Client(api_key, config.model, config.max_tokens)
     client: Client = group_clients[group_id]
+    client.chat.api_key = api_key
     try:
         msg = await client.send(prompt, record)
         if record:
@@ -90,6 +93,7 @@ async def set_conversation(bot, ev: CQEvent):
     msg = [{"role": "system", "content": text}]
     config.conversations[name] = msg
     config.save_conversations()
+    await bot.send(ev, f"{name}创建完成")
 
 
 def save_data(group_id, conversation, messages):
@@ -107,7 +111,7 @@ async def change_conversation(bot, ev: CQEvent):
         name = "default"
     group_id = str(ev.group_id)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(config.api_key, config.model, config.max_tokens)
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens)
     if name in config.conversations:
         save_data(group_id, name, config.conversations[name])
         client = group_clients[group_id]
@@ -126,3 +130,17 @@ async def list_conversation(bot, ev: CQEvent):
     for k in config.conversations:
         msg += f"{k}、"
     await bot.send(ev, msg.strip("、"))
+
+
+@sv.on_fullmatch(('重置人格', '重置会话'))
+async def reset_conversation(bot, ev: CQEvent):
+    group_id = str(ev.group_id)
+    name = str(ev.message.extract_plain_text()).strip()
+    if name == "" and group_id in config.groups:
+        name = config.groups[group_id]
+    else:
+        name = "default"
+    if name in config.conversations:
+        config.conversations[name] = config.conversations[name][:1]
+        config.save_conversations()
+        await bot.send(ev, "重置成功")
