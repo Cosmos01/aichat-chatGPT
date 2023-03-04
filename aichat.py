@@ -22,8 +22,6 @@ config = Config()
 group_clients = {}
 count = 0
 
-default_client = Client(random.choice(config.api_keys), config.model, config.max_tokens)
-
 async def get_chat_response(group_id, prompt):
     group_id = str(group_id)
     record = config.record
@@ -33,7 +31,7 @@ async def get_chat_response(group_id, prompt):
         record = True
     api_key = random.choice(config.api_keys)
     if group_id not in group_clients:
-        group_clients[group_id] = default_client
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens)
     client: Client = group_clients[group_id]
     client.chat.api_key = api_key
     try:
@@ -113,7 +111,7 @@ async def change_conversation(bot, ev: CQEvent):
         name = "default"
     group_id = str(ev.group_id)
     if group_id not in group_clients:
-        group_clients[group_id] = default_client
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens)
     if name in config.conversations:
         save_data(group_id, name, config.conversations[name])
         client = group_clients[group_id]
