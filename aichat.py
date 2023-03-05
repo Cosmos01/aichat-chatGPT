@@ -134,7 +134,7 @@ async def list_conversation(bot, ev: CQEvent):
     await bot.send(ev, msg.strip("、"))
 
 
-@sv.on_fullmatch(('重置人格', '重置会话'))
+@sv.on_prefix(('重置人格', '重置会话'))
 async def reset_conversation(bot, ev: CQEvent):
     group_id = str(ev.group_id)
     name = str(ev.message.extract_plain_text()).strip()
