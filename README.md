@@ -1,4 +1,4 @@
-# GPT3.5 API更新了，并且价格很便宜，近期改新版本
+# GPT3.5 API无法使用的可以试试这个
 
 ### 使用[pyChatGPT](https://github.com/terry3041/pyChatGPT)方案。
 > #### 我是在Windows环境下测试的，其他环境出问题我无法处理，作者给出了linux的方案，具体可以看看说明：https://github.com/terry3041/pyChatGPT
