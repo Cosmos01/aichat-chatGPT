@@ -11,6 +11,7 @@ help_text = """命令(人格可以替换为会话)
 3. `选择人格/切换人格/默认人格+人格名`: 切换到对应人格，不填则使用默认人格
 4. `/t+消息或@bot+消息`: 前面加上记住两字可以让关闭记忆功能的bot记住对话，记住两字不会放入对话
 5. `重置人格/重置会话+人格名`: 重置人格，不填则重置当前人格，无当前人格则重置默认人格
+6. `对话记忆+on/off`: 开启/关闭对话记忆，不加则返回当前状态
 """
 
 sv = Service('人工智障', enable_on_default=False, help_=help_text)
@@ -22,6 +23,7 @@ config = Config()
 group_clients = {}
 count = 0
 
+
 async def get_chat_response(group_id, prompt):
     group_id = str(group_id)
     record = config.record
@@ -31,7 +33,7 @@ async def get_chat_response(group_id, prompt):
         record = True
     api_key = random.choice(config.api_keys)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens)
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
     client: Client = group_clients[group_id]
     client.chat.api_key = api_key
     try:
@@ -43,7 +45,7 @@ async def get_chat_response(group_id, prompt):
             count += 1
             if config.interval > 0 and count % config.interval == 0:
                 config.save_conversations()
-                config.save_groups()
+                config.save_config()
         return msg
     except Exception as e:
         print(e)
@@ -101,7 +103,7 @@ def save_data(group_id, conversation, messages):
     config.conversations[conversation] = messages
     config.groups[str(group_id)] = conversation
     config.save_conversations()
-    config.save_groups()
+    config.save_config()
 
 
 @sv.on_prefix(('选择人格', '选择会话', '切换人格', '切换会话', '默认人格', '默认会话'))
@@ -111,7 +113,7 @@ async def change_conversation(bot, ev: CQEvent):
         name = "default"
     group_id = str(ev.group_id)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens)
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens,config.proxy)
     if name in config.conversations:
         save_data(group_id, name, config.conversations[name])
         client = group_clients[group_id]
@@ -144,3 +146,21 @@ async def reset_conversation(bot, ev: CQEvent):
         config.conversations[name] = config.conversations[name][:1]
         config.save_conversations()
         await bot.send(ev, "重置成功")
+
+
+@sv.on_prefix('对话记忆')
+async def set_record(bot, ev: CQEvent):
+    cfg = str(ev.message.extract_plain_text()).strip()
+    if cfg == "on":
+        config.record = True
+        await bot.send(ev, "对话记忆已开启")
+    elif cfg == "off":
+        config.record = False
+        await bot.send(ev, "对话记忆已关闭")
+    else:
+        if config.record:
+            await bot.send(ev, "当前对话记忆状态：开启")
+        else:
+            await bot.send(ev, "当前对话记忆状态：关闭")
+        return 
+    config.save_config()
