@@ -12,7 +12,7 @@ class Client:
 
     def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy=""):
         self.chat.api_key = api_key
-        if proxy.strip() != "":
+        if proxy.strip() == "":
             openai.proxy = {'http': proxy,'https': proxy}
         self.model = model
         self.max_tokens = max_tokens
@@ -27,6 +27,7 @@ class Client:
 
     async def send(self, message, record=True):
         openai.api_key = self.chat.api_key
+
         self.messages.append({"role": "user", "content": message})
         try:
             response = await self.chat.acreate(
@@ -40,6 +41,11 @@ class Client:
                 self.messages.append({"role": "assistant", "content": msg})
             else:
                 self.messages = self.messages[:-1]
+                
+            #token过长删除前两条对话
+            if response['usage']['total_tokens'] > 4096 - self.max_tokens:
+                del self.messages[1:5]
+            
             return msg.strip()
         except Exception as e:
             return f"发生错误: {str(e).strip()}"
