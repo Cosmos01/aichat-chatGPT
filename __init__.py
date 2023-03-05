@@ -11,6 +11,7 @@ class Config:
     groups: dict = {}  # 群组列表
     interval: int = 5  # 存档间隔
     max_tokens: int = 1000  # 最大字符数
+    proxy: str = ""  # 代理
 
     def __init__(self):
         self._config.read(os.path.join(os.path.dirname(__file__), 'config.ini'), encoding='utf-8')
@@ -21,6 +22,7 @@ class Config:
         self.record = self._config.getboolean("OPTION", "record", fallback=True)
         self.interval = self._config.getint("OPTION", "interval", fallback=5)
         self.max_tokens = self._config.getint("OPTION", "max_tokens", fallback=1000)
+        self.proxy = self._config.get("OPTION", "proxy", fallback="")
         items = self._config.items("GROUP")
         for item in items:
             if item[1] not in self.conversations:
@@ -36,11 +38,12 @@ class Config:
         with open(os.path.join(os.path.dirname(__file__), 'conversations.json'), 'r', encoding='utf-8') as f:
             self.conversations = json.load(f)
 
-    def save_groups(self):
+    def save_config(self):
         for group in self.groups:
             if self.groups[group] not in self.conversations:
                 self._config.set("GROUP", group, "default")
             else:
                 self._config.set("GROUP", group, self.groups[group])
+        self._config.set("OPTION", "record", str(self.record).lower())
         with open(os.path.join(os.path.dirname(__file__), 'config.ini'), 'w', encoding='utf-8') as f:
             self._config.write(f)
