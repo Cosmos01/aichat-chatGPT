@@ -14,12 +14,13 @@ aichat插件魔改GPT-3.5 API版本
 3. `选择人格/切换人格/默认人格+人格名`: 切换到对应人格，不填则使用默认人格
 4. `/t+消息或@bot+消息`: 你懂的（/t是随便打的，可以自己去代码里改成别的）
 5. `重置人格/重置会话+人格名`: 重置人格，不填则重置当前人格，无当前人格则重置默认人格
+6. `对话记忆+on/off`: 开启/关闭对话记忆，不加则返回当前状态  
 
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库：`pip install openai`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
-4. 到config.ini中填写配置，基本只要填api_key(可以多个)，其他配置见下文。注意修改后保存为UTF-8。
+4. 到config.ini中填写配置，基本只要填api_key(可以多个)和proxy，其他配置见下文。注意修改后保存为UTF-8。
 5. 重启HoshinoBot (启动前确保关闭了浏览器)
 6. 插件默认禁用，在要启用本插件的群中发送命令`启用 人工智障`
   
@@ -27,6 +28,8 @@ aichat插件魔改GPT-3.5 API版本
 ## 配置参数
 - api-key
 > 由于有30分钟条数限制，可以填写多个api-key，半角逗号(",")隔开，每次对话随机选择
+- proxy 代理
+> HTTP代理，不需要代理留空即可，例：http://127.0.0.1:7890
 - record 记忆开关
 > 设为false则不会记录会话，除非你在对话前加上"记住"两个字(两个字会被删去)，这样可以节省很多费用。
 - max_tokens 最大回答长度
@@ -36,7 +39,7 @@ aichat插件魔改GPT-3.5 API版本
 
 
 ## 常见问题
-1.
+1. `Error communicating with OpenAI` 代理问题，配置了代理也这样就换节点吧。
 
 
 
