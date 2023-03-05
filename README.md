@@ -1,7 +1,6 @@
 ### 现已更新API版本，API支持了GPT3.5并且大幅降价，约等于白嫖
 > #### 网页版在这个分支下: https://github.com/Cosmos01/aichat-chatGPT/tree/pyChatGPT
-> #### 连夜写的，大部分代码是copilot完成的，可能会有些问题，欢迎提交issues，有想加的功能可以提
-> #### 一些功能添加和完善中，部分逻辑还没测试
+> #### 可能会有些问题，欢迎提交issues，有想加的功能可以提
 ------
   
 # aichat-chatGPT
