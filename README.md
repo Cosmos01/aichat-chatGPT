@@ -27,7 +27,7 @@ ChatGPT要一个一个字打印，会比较慢。要快的可以去找GPT-3 API�
 
 ## 安装方法
 0. 确保有安装110以上版本的谷歌浏览器，参考:https://github.com/terry3041/pyChatGPT#getting-started
-1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
+1. 在HoshinoBot的插件目录modules下clone本项目 `git clone --branch pyChatGPT https://github.com/Cosmos01/aichat-chatGPT.git`
 2. 安装必要第三方库[pyChatGPT](https://github.com/terry3041/pyChatGPT)：`pip install pyChatGPT==0.4.3.3`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到auth.json中填写配置，参考下面认证方式和配置，
