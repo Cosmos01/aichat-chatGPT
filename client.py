@@ -12,7 +12,7 @@ class Client:
 
     def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy=""):
         self.chat.api_key = api_key
-        if proxy:
+        if proxy.strip() == "":
             openai.proxy = {'http': proxy,'https': proxy}
         self.model = model
         self.max_tokens = max_tokens
