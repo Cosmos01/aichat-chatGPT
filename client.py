@@ -12,7 +12,7 @@ class Client:
 
     def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy=""):
         self.chat.api_key = api_key
-        if proxy.strip() != "":
+        if proxy.strip() == "":
             openai.proxy = {'http': proxy,'https': proxy}
         self.model = model
         self.max_tokens = max_tokens
@@ -38,6 +38,7 @@ class Client:
             msg = response.choices[0].message.content.strip()
             if msg and record:
                 self.messages.append({"role": "user", "content": message})
+                self.messages.append({"role": "assistant", "content": msg})
             else:
                 self.messages = self.messages[:-1]
             return msg.strip()
