@@ -37,7 +37,6 @@ class Client:
             )
             msg = response.choices[0].message.content.strip()
             if msg and record:
-                self.messages.append({"role": "user", "content": message})
                 self.messages.append({"role": "assistant", "content": msg})
             else:
                 self.messages = self.messages[:-1]
