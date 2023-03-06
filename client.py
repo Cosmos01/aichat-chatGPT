@@ -52,4 +52,6 @@ class Client:
             if "This model's maximum context length is 4096 tokens" in str(e):
                 del self.messages[1:5]
                 return "对话过长，已删除部分对话"
+            if "Rate limit reached for" in str(e):
+                return "API请求过于频繁，请稍后再试"
             return f"发生错误: {str(e).strip()}"
