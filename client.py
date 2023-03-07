@@ -54,4 +54,6 @@ class Client:
                 return "对话过长，已删除部分对话"
             if "Rate limit reached for" in str(e):
                 return "API请求过于频繁，请稍后再试"
+            if "You exceeded your current quota" in str(e):
+                return f"api key({openai.api_key[0:len(openai.api_key)-8]}********)配额已用完，请更换api key"
             return f"发生错误: {str(e).strip()}"
