@@ -146,6 +146,9 @@ async def reset_conversation(bot, ev: CQEvent):
     if name in config.conversations:
         config.conversations[name] = config.conversations[name][:1]
         config.save_conversations()
+        for client in group_clients.values():
+            if client.conversation == name:
+                client.messages = config.conversations[name]
         await bot.send(ev, "重置成功")
 
 
