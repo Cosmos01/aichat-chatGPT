@@ -43,13 +43,13 @@ class Client:
                 self.messages = self.messages[:-1]
 
             #token过长删除最早两条对话
-            if response['usage']['total_tokens'] > 4096 - self.max_tokens:
+            if response['usage']['total_tokens'] > 4097 - self.max_tokens:
                 del self.messages[1:5]
 
             return msg.strip()
         except Exception as e:
             self.messages = self.messages[:-1]
-            if "This model's maximum context length is 4096 tokens" in str(e):
+            if "This model's maximum context length is" in str(e):
                 del self.messages[1:5]
                 return "对话过长，已删除部分对话"
             if "Rate limit reached for" in str(e):
