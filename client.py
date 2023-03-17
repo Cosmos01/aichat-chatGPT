@@ -43,7 +43,7 @@ class Client:
                 self.messages = self.messages[:-1]
 
             #token过长删除最早两条对话
-            if response['usage']['total_tokens'] > 4097 - self.max_tokens:
+            if response['usage']['total_tokens'] > 3800 - self.max_tokens:
                 del self.messages[1:5]
 
             return msg.strip()
