@@ -12,6 +12,7 @@ help_text = """命令(人格可以替换为会话)
 4. `/t+消息或@bot+消息`: 前面加上记住两字可以让关闭记忆功能的bot记住对话，记住两字不会放入对话
 5. `重置人格/重置会话+人格名`: 重置人格，不填则重置当前人格，无当前人格则重置默认人格
 6. `对话记忆+on/off`: 开启/关闭对话记忆，不加则返回当前状态
+7. `删除会话+会话名` : 删除会话，不填则删除当前会话，默认会话不可删除
 """
 
 sv = Service('人工智障', enable_on_default=False, help_=help_text)
@@ -95,7 +96,33 @@ async def set_conversation(bot, ev: CQEvent):
     msg = [{"role": "system", "content": text}]
     config.conversations[name] = msg
     config.save_conversations()
+    if str(ev.group_id) in group_clients:
+        group_clients[str(ev.group_id)].conversation = name
+        group_clients[str(ev.group_id)].messages = msg
     await bot.send(ev, f"{name}创建完成")
+
+
+@sv.on_prefix(('删除人格', '删除会话'))
+async def delete_conversation(bot, ev: CQEvent):
+    name = str(ev.message.extract_plain_text()).strip()
+    if name == "":
+        if str(ev.group_id) in group_clients:
+            name = group_clients[str(ev.group_id)].conversation
+            if name != "default":
+                group_clients[str(ev.group_id)].conversation = "default"
+                group_clients[str(ev.group_id)].messages = config.conversations["default"]
+        else:
+            await bot.send(ev, "当前无会话，请指定要删除的会话")
+            return
+    if name == "default":
+        await bot.send(ev, "默认会话不可删除")
+        return
+    if name not in config.conversations:
+        await bot.send(ev, "人格不存在")
+        return
+    del config.conversations[name]
+    config.save_conversations()
+    await bot.send(ev, f"{name}删除成功")
 
 
 def save_data(group_id, conversation, messages):
