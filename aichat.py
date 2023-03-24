@@ -185,33 +185,39 @@ async def del_msg(bot, ev: CQEvent):
     group_id = str(ev.group_id)
     p = str(ev.message.extract_plain_text()).strip()
     num = 2
-    if p != "":
-        num = int(p)*2
+    if p != "" and int(p):
+        num = int(p) * 2
     name = "default"
     if group_id in config.groups:
         name = config.groups[group_id]
     if name not in config.conversations:
         await bot.send(ev, "人格不存在")
         return
-    max = len(config.conversations[name])-1
+    if group_id not in group_clients:
+        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
+    client = group_clients[group_id]
+    m = len(client.messages)-1
+    if m % 2 == 1:
+        m = m - 1
     if num == 0:
         await bot.send(ev, "禁止删除设定")
         return
-    if max == 0:
+    if m < 1:
         await bot.send(ev, "没有可以删除的对话")
         return
-    if num < max:
-        if -num > max:
-            await bot.send(ev, f"只能从第{str(int(max / 2))}条对话开始删除")
+    if num < m:
+        if -num > m:
+            await bot.send(ev, f"只能从第{str(int(m / 2))}条对话开始删除")
             return
-        del config.conversations[name][-num:]
+        del client.messages[-num:]
+        config.conversations[client.conversation] = client.messages
         config.save_conversations()
         for client in group_clients.values():
             if client.conversation == name:
                 client.messages = config.conversations[name]
         await bot.send(ev, "删除成功")
     else:
-        await bot.send(ev, f"最多只能删除{str(int(max/2)-1)}条对话")
+        await bot.send(ev, f"最多只能删除{str(int(m / 2) - 1)}条对话")
         
 
 @sv.on_prefix('对话记忆')
