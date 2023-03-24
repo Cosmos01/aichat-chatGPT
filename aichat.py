@@ -26,6 +26,19 @@ group_clients = {}
 count = 0
 
 
+def create_client(group_id):
+    client = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
+    conversation = "default"
+    if group_id in config.groups:
+        conversation = config.groups[group_id]
+        if conversation not in config.conversations:
+            conversation = "default"
+    client.conversation = conversation
+    client.messages = config.conversations[client.conversation]
+    group_clients[group_id] = client
+    return
+
+
 async def get_chat_response(group_id, prompt):
     group_id = str(group_id)
     record = config.record
@@ -35,7 +48,7 @@ async def get_chat_response(group_id, prompt):
         record = True
     api_key = random.choice(config.api_keys)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
+        create_client(group_id)
     client: Client = group_clients[group_id]
     client.chat.api_key = api_key
     try:
@@ -141,7 +154,7 @@ async def change_conversation(bot, ev: CQEvent):
         name = "default"
     group_id = str(ev.group_id)
     if group_id not in group_clients:
-        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
+        create_client(group_id)
     if name in config.conversations:
         save_data(group_id, name, config.conversations[name])
         client = group_clients[group_id]
@@ -179,29 +192,23 @@ async def reset_conversation(bot, ev: CQEvent):
                 client.messages = config.conversations[name]
         await bot.send(ev, "重置成功")
 
-        
+
 @sv.on_prefix('删除对话')
 async def del_msg(bot, ev: CQEvent):
     group_id = str(ev.group_id)
     p = str(ev.message.extract_plain_text()).strip()
     num = 2
-    if p != "" and int(p):
+    if p != "" and p.lstrip('-').isdigit():
         num = int(p) * 2
-    name = "default"
-    if group_id in config.groups:
-        name = config.groups[group_id]
-    if name not in config.conversations:
-        await bot.send(ev, "人格不存在")
-        return
-    if group_id not in group_clients:
-        group_clients[group_id] = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
-    client = group_clients[group_id]
-    m = len(client.messages)-1
-    if m % 2 == 1:
-        m = m - 1
     if num == 0:
         await bot.send(ev, "禁止删除设定")
         return
+    if group_id not in group_clients:
+        create_client(group_id)
+    client = group_clients[group_id]
+    m = len(client.messages) - 1
+    if m % 2 == 1:
+        m = m - 1
     if m < 1:
         await bot.send(ev, "没有可以删除的对话")
         return
@@ -212,13 +219,16 @@ async def del_msg(bot, ev: CQEvent):
         del client.messages[-num:]
         config.conversations[client.conversation] = client.messages
         config.save_conversations()
-        for client in group_clients.values():
-            if client.conversation == name:
-                client.messages = config.conversations[name]
+        # 覆盖其他Client
+        for gid,c in group_clients.items():
+            if gid == group_id:
+                continue
+            if c.conversation == client.conversation:
+                c.messages = client.messages
         await bot.send(ev, "删除成功")
     else:
         await bot.send(ev, f"最多只能删除{str(int(m / 2) - 1)}条对话")
-        
+
 
 @sv.on_prefix('对话记忆')
 async def set_record(bot, ev: CQEvent):
