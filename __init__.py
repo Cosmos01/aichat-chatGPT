@@ -25,7 +25,7 @@ class Config:
         self.proxy = self._config.get("OPTION", "proxy", fallback="")
         items = self._config.items("GROUP")
         for item in items:
-            if item[1] not in self.conversations:
+            if item[1] in self.conversations:
                 self.groups[item[0]] = item[1]
             else:
                 self.groups[item[0]] = "default"
