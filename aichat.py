@@ -194,7 +194,16 @@ async def del_msg(bot, ev: CQEvent):
         await bot.send(ev, "人格不存在")
         return
     max = len(config.conversations[name])-1
+    if num == 0:
+        await bot.send(ev, "禁止删除设定")
+        return
+    if max == 0:
+        await bot.send(ev, "没有可以删除的对话")
+        return
     if num < max:
+        if -num > max:
+            await bot.send(ev, f"只能从第{str(int(max / 2))}条对话开始删除")
+            return
         del config.conversations[name][-num:]
         config.save_conversations()
         for client in group_clients.values():
