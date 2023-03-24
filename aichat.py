@@ -13,6 +13,7 @@ help_text = """命令(人格可以替换为会话)
 5. `重置人格/重置会话+人格名`: 重置人格，不填则重置当前人格，无当前人格则重置默认人格
 6. `对话记忆+on/off`: 开启/关闭对话记忆，不加则返回当前状态
 7. `删除会话+会话名` : 删除会话，不填则删除当前会话，默认会话不可删除
+8. `删除对话+条数`: 删除上N条对话，不加条数则删除上一条。1条对话指一次问与答，不需要乘2。
 """
 
 sv = Service('人工智障', enable_on_default=False, help_=help_text)
@@ -178,6 +179,31 @@ async def reset_conversation(bot, ev: CQEvent):
                 client.messages = config.conversations[name]
         await bot.send(ev, "重置成功")
 
+        
+@sv.on_prefix('删除对话')
+async def del_msg(bot, ev: CQEvent):
+    group_id = str(ev.group_id)
+    p = str(ev.message.extract_plain_text()).strip()
+    num = 2
+    if p != "":
+        num = int(p)*2
+    name = "default"
+    if group_id in config.groups:
+        name = config.groups[group_id]
+    if name not in config.conversations:
+        await bot.send(ev, "人格不存在")
+        return
+    max = len(config.conversations[name])-1
+    if num < max:
+        del config.conversations[name][-num:]
+        config.save_conversations()
+        for client in group_clients.values():
+            if client.conversation == name:
+                client.messages = config.conversations[name]
+        await bot.send(ev, "删除成功")
+    else:
+        await bot.send(ev, f"最多只能删除{str(int(max/2)-1)}条对话")
+        
 
 @sv.on_prefix('对话记忆')
 async def set_record(bot, ev: CQEvent):
