@@ -27,7 +27,7 @@ count = 0
 
 
 def create_client(group_id):
-    client = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy)
+    client = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy, config.api_base)
     conversation = "default"
     if group_id in config.groups:
         conversation = config.groups[group_id]
