@@ -12,6 +12,7 @@ class Config:
     interval: int = 5  # 存档间隔
     max_tokens: int = 1000  # 最大字符数
     proxy: str = ""  # 代理
+    api_base : str = ""
 
     def __init__(self):
         self._config.read(os.path.join(os.path.dirname(__file__), 'config.ini'), encoding='utf-8')
@@ -23,6 +24,7 @@ class Config:
         self.interval = self._config.getint("OPTION", "interval", fallback=5)
         self.max_tokens = self._config.getint("OPTION", "max_tokens", fallback=1000)
         self.proxy = self._config.get("OPTION", "proxy", fallback="")
+        self.proxy = self._config.get("OPTION", "api_base", fallback="")
         items = self._config.items("GROUP")
         for item in items:
             if item[1] in self.conversations:
