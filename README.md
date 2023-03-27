@@ -39,6 +39,8 @@ aichat插件魔改GPT-3.5 API版本
 > 改小了也能节省一些费用。
 - interval 保存间隔
 > 每进行N次对话就在本地保存会话记录，非记忆对话不计次。
+- api_base API地址
+> 需要修改API地址的填写，留空默认：https://api.openai.com/v1
 
 
 ## 常见问题
