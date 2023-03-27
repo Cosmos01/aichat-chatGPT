@@ -13,8 +13,9 @@ class Client:
     def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy="", api_base=""):
         self.chat.api_key = api_key
         if proxy.strip() != "":
-            openai.proxy = {'http': proxy,'https': proxy}
+            openai.proxy = {'http': proxy}
         if api_base.strip() != "":
+            openai.verify_ssl_certs = False
             openai.api_base = api_base
         self.model = model
         self.max_tokens = max_tokens
@@ -29,7 +30,6 @@ class Client:
 
     async def send(self, message, record=True):
         openai.api_key = self.chat.api_key
-
         self.messages.append({"role": "user", "content": message})
         try:
             response = await self.chat.acreate(
