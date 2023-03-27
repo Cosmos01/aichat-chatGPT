@@ -24,7 +24,7 @@ class Config:
         self.interval = self._config.getint("OPTION", "interval", fallback=5)
         self.max_tokens = self._config.getint("OPTION", "max_tokens", fallback=1000)
         self.proxy = self._config.get("OPTION", "proxy", fallback="")
-        self.proxy = self._config.get("OPTION", "api_base", fallback="")
+        self.api_base = self._config.get("OPTION", "api_base", fallback="")
         items = self._config.items("GROUP")
         for item in items:
             if item[1] in self.conversations:
