@@ -13,6 +13,8 @@ class Config:
     max_tokens: int = 1000  # 最大字符数
     proxy: str = ""  # 代理
     api_base : str = ""
+    api_type : str = "open_ai"
+    api_version : str = ""
 
     def __init__(self):
         self._config.read(os.path.join(os.path.dirname(__file__), 'config.ini'), encoding='utf-8')
@@ -25,6 +27,8 @@ class Config:
         self.max_tokens = self._config.getint("OPTION", "max_tokens", fallback=1000)
         self.proxy = self._config.get("OPTION", "proxy", fallback="")
         self.api_base = self._config.get("OPTION", "api_base", fallback="")
+        self.api_type = self._config.get("OPTION", "api_type", fallback="open_ai")
+        self.api_version = self._config.get("OPTION", "api_version", fallback="")
         items = self._config.items("GROUP")
         for item in items:
             if item[1] in self.conversations:
