@@ -21,7 +21,7 @@ aichat插件魔改GPT-3.5 API版本
   
 ## 安装方法
 1. 在HoshinoBot的插件目录modules下clone本项目 `git clone https://github.com/Cosmos01/aichat-chatGPT.git`
-2. 安装必要第三方库：`pip install openai==0.27.0`
+2. 安装必要第三方库：`pip install openai==0.27.8`
 3. 在 `config/__bot__.py`的MODULES_ON列表里加入 `aichat-chatGPT`
 4. 到config.ini中填写配置，基本只要填api_key(可以多个)和proxy，其他配置见下文。注意修改后保存为UTF-8。
 5. 重启HoshinoBot (启动前确保关闭了浏览器)
