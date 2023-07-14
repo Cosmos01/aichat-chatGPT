@@ -25,9 +25,21 @@ config = Config()
 group_clients = {}
 count = 0
 
+@sv.on_fullmatch('AI配置重载')
+async def get_config(bot, ev):
+    global config
+    config = Config()
 
 def create_client(group_id):
-    client = Client(random.choice(config.api_keys), config.model, config.max_tokens, config.proxy, config.api_base)
+    client = Client(
+        random.choice(config.api_keys),
+        config.model,
+        config.max_tokens,
+        config.proxy,
+        config.api_base,
+        config.api_type,
+        config.api_version
+    )
     conversation = "default"
     if group_id in config.groups:
         conversation = config.groups[group_id]
