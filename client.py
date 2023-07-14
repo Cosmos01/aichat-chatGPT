@@ -10,13 +10,18 @@ class Client:
     messages: list = []
     max_tokens: int = 1000
 
-    def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy="", api_base=""):
+
+    def __init__(self, api_key="", model="gpt-3.5-turbo", max_tokens=1000, proxy="", api_base="", api_type="open_ai", api_version=""):
         self.chat.api_key = api_key
+
         if proxy.strip() != "":
             openai.proxy = {'http': proxy}
         if api_base.strip() != "":
             openai.verify_ssl_certs = False
             openai.api_base = api_base
+        if api_version.strip() != "":
+            openai.api_version = api_version
+        openai.api_type = api_type
         self.model = model
         self.max_tokens = max_tokens
         self.conversation = "default"
