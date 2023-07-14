@@ -39,7 +39,11 @@ aichat插件魔改GPT-3.5 API版本
 - interval 保存间隔
 > 每进行N次对话就在本地保存会话记录，非记忆对话不计次。
 - api_base API地址
-> 需要修改API地址的填写，留空默认：https://api.openai.com/v1
+> 需要修改API地址的填写，留空默认：https://api.openai.com/v1。用Azure的在这填Endpoint。
+- api_type API类型
+> 默认"open_ai"，用Azure的填写"azure"
+- api_version API版本
+> 默认空，用Azure的可填可不填，当前默认为"2023-05-15"
 
 
 ## 常见问题
