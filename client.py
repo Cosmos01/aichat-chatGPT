@@ -44,6 +44,8 @@ class Client:
                 max_tokens=self.max_tokens,
                 timeout=30
             )
+            if response.choices[0]['finish_reason'] == "content_filter":
+                return "敏感内容被过滤，未返回消息"
             msg = response.choices[0].message.content.strip()
             if msg and record:
                 self.messages.append({"role": "assistant", "content": msg})
