@@ -39,7 +39,7 @@ class Client:
         try:
             response = await self.chat.acreate(
                 model=self.model,
-                engine=self.model,
+                engine=self.model if openai.api_type == "azure" else None,
                 messages=self.messages,
                 max_tokens=self.max_tokens,
                 timeout=30
