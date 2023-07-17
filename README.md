@@ -42,7 +42,7 @@ aichat插件魔改GPT-3.5 API版本
 - api_base API地址
 > 需要修改API地址的填写，留空默认：https://api.openai.com/v1。用Azure的在这填Endpoint。
 - api_type API类型
-> 默认"open_ai"，用Azure的填写"azure"
+> 默认"open_ai"，Azure用户填"azure"
 - api_version API版本
 > 默认空，Azure用户填"2023-05-15"
 
