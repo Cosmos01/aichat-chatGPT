@@ -39,6 +39,7 @@ class Client:
         try:
             response = await self.chat.acreate(
                 model=self.model,
+                engine=self.model,
                 messages=self.messages,
                 max_tokens=self.max_tokens,
                 timeout=30
